@@ -186,4 +186,6 @@ Output: accuracy: 0.9078  ;  val_accuracy: 0.9144
 
 ## Model Outputs (epochs:10)
 
-[Model outputs by Architeture ](https://www.notion.so/999de183ae1942dc9f9d32f35bbdff56)
+Screen Shot 2020-09-12 at 6.31.00 PM.png
+
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen Shot 2020-09-12 at 6.31.00 PM.png" width="40%">
