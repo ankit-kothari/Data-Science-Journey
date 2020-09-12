@@ -23,7 +23,7 @@
 
 ### **Loading the data**
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ecc39189-527f-4965-9cd3-c26f30103670/Screen_Shot_2020-08-03_at_1.43.42_AM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ecc39189-527f-4965-9cd3-c26f30103670/Screen_Shot_2020-08-03_at_1.43.42_AM.png)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-03_at_1.43.42_AM.png" width="90%">
 
     
 
@@ -62,8 +62,8 @@ Name: Clothing ID, dtype: int64
 ```python
 data_dress = data[(data['Class Name']=='Dresses') & (data['Clothing ID']==1078)]
 ```
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-03_at_1.48.29_AM.png" width="90%">
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6d5494d3-0ba2-41f5-a2b5-2633f5b1242c/Screen_Shot_2020-08-03_at_1.48.29_AM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6d5494d3-0ba2-41f5-a2b5-2633f5b1242c/Screen_Shot_2020-08-03_at_1.48.29_AM.png)
 
 ### **Converting Reviews into spacy object**
 
@@ -319,7 +319,7 @@ over $250 - MONEY - Monetary values, including unit
 displacy.render(doc[0:500], style='ent', jupyter=True, options={'distance': 110})
 ```
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e8aaac8d-9e87-4583-996c-46e5af3fe02d/Screen_Shot_2020-08-03_at_2.26.12_AM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e8aaac8d-9e87-4583-996c-46e5af3fe02d/Screen_Shot_2020-08-03_at_2.26.12_AM.png)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-03_at_2.26.12_AM.png" width="50%">
 
 ### Adding **Custom Name Entity Tags** to the document
 
