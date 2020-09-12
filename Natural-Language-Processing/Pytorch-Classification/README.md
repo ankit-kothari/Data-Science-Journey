@@ -30,6 +30,8 @@ It is used to create a vector relationship between the words in the corpus, Ther
 - Create a dictionary of word2vector from the corpus in the dataset
 - Create an embedding matrix  (we can restric the Max Vocab Size)
 
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/A3E12406-60DE-49D9-BCB4-77080F0A8724.jpeg" width="60%">
+
 ## PyTorch NLP: Text Preprocessing Summary
 
 - Load the data, convert it into a pandas dataframe and followed by a .csv file
