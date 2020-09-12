@@ -23,7 +23,7 @@
 
 ### **Loading the data**
 
-<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-03_at_1.43.42_AM.png" width="90%">
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-03_at_1.43.42_AM.png" width="100%">
 
     
 
@@ -62,7 +62,7 @@ Name: Clothing ID, dtype: int64
 ```python
 data_dress = data[(data['Class Name']=='Dresses') & (data['Clothing ID']==1078)]
 ```
-<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-03_at_1.48.29_AM.png" width="90%">
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-03_at_1.48.29_AM.png" width="100%">
 
 
 ### **Converting Reviews into spacy object**
@@ -319,7 +319,7 @@ over $250 - MONEY - Monetary values, including unit
 displacy.render(doc[0:500], style='ent', jupyter=True, options={'distance': 110})
 ```
 
-<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-03_at_2.26.12_AM.png" width="50%">
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-03_at_2.26.12_AM.png" width="80%">
 
 ### Adding **Custom Name Entity Tags** to the document
 
