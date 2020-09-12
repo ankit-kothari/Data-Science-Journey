@@ -105,6 +105,9 @@ class RNN(nn.Module):
 
 ## Model Output
 
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/pt1.jpeg" width="60%">
+
+
 Train_acc: 97.9286 
 
 Val_accuracy: 95.7106
