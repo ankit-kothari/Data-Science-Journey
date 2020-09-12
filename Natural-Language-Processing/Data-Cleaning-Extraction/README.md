@@ -135,4 +135,4 @@ clean_data_grouped = clean_data.groupby(['topic_name','review_category']).agg(
 ```python
 clean_data_grouped.sort_values(by=['percentage_bad'], ascending=False)
 ```
-<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-06_at_10.57.38_PM.png" width="40%">
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-06_at_10.57.38_PM.png" width="70%">
