@@ -28,7 +28,8 @@ It is used to create a vector relationship between the words in the corpus, Ther
 - Create a dictionary of word2vector from the corpus in the dataset
 - Create an embedding matrix  (we can restric the Max Vocab Size)
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e1f11760-c69d-49bd-811c-f1add9436d8e/A3E12406-60DE-49D9-BCB4-77080F0A8724.jpeg](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e1f11760-c69d-49bd-811c-f1add9436d8e/A3E12406-60DE-49D9-BCB4-77080F0A8724.jpeg)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/A3E12406-60DE-49D9-BCB4-77080F0A8724.jpeg" width="40%">
+
 
 ## Tokenizer and Padding
 
@@ -72,11 +73,11 @@ output = dense_1(batch_norm)
 model = Model(input_, output)
 ```
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d46d1482-81d7-445f-a8ce-b660014e92e4/Screen_Shot_2020-07-08_at_3.06.24_AM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d46d1482-81d7-445f-a8ce-b660014e92e4/Screen_Shot_2020-07-08_at_3.06.24_AM.png)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-07-08_at_3.06.24_AM.png" width="40%">
 
 BiLSTM with pre padding Train and Val Loss
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8160df04-6280-40ec-847f-cf03bbf4346c/Screen_Shot_2020-07-08_at_3.06.55_AM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8160df04-6280-40ec-847f-cf03bbf4346c/Screen_Shot_2020-07-08_at_3.06.55_AM.png)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-07-08_at_3.06.55_AM.png" width="40%">
 
 BiLSTM with pre padding Train and Val accuracy
 
@@ -98,11 +99,12 @@ output = dense(gmpl)
 model = Model(input_, output)
 ```
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/de2f2946-9984-4f7d-8424-c19be51a3a7f/Screen_Shot_2020-07-08_at_2.35.40_AM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/de2f2946-9984-4f7d-8424-c19be51a3a7f/Screen_Shot_2020-07-08_at_2.35.40_AM.png)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-07-08_at_2.35.40_AM.png" width="40%">
 
 LSTM with pre padding Train and Val Loss
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4787c4e5-81af-4080-9cd4-6bd8a9bae8df/Screen_Shot_2020-07-08_at_2.35.26_AM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4787c4e5-81af-4080-9cd4-6bd8a9bae8df/Screen_Shot_2020-07-08_at_2.35.26_AM.png)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-07-08_at_2.35.26_AM.png" width="40%">
+
 
 LSTM with post padding Train and Val accuracy
 
@@ -129,11 +131,13 @@ output = dense_1(batch_norm)
 model = Model(input_, output)
 ```
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/21a9c0a4-b0dd-46ec-9851-8dab2e95ee80/Screen_Shot_2020-07-08_at_1.31.21_AM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/21a9c0a4-b0dd-46ec-9851-8dab2e95ee80/Screen_Shot_2020-07-08_at_1.31.21_AM.png)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-07-08_at_1.31.21_AM.png" width="40%">
+
 
 BiLSTM with post padding Train and Val Loss
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e9a68d76-9164-4235-80cc-76a80998d401/Screen_Shot_2020-07-08_at_1.32.15_AM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e9a68d76-9164-4235-80cc-76a80998d401/Screen_Shot_2020-07-08_at_1.32.15_AM.png)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-07-08_at_1.32.15_AM.png" width="40%">
+
 
 BiLSTM with post padding Train and Val accuracy
 
@@ -168,11 +172,13 @@ output = Dense((len(K))(batch_norm)
 model = Model(input_, output)
 ```
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b7833787-a327-4ad4-8b95-b10205295d3e/Screen_Shot_2020-07-08_at_3.46.30_AM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b7833787-a327-4ad4-8b95-b10205295d3e/Screen_Shot_2020-07-08_at_3.46.30_AM.png)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-07-08_at_3.46.30_AM.png" width="40%">
 
 Multi-Layer CNN-1D with pre-padding Train and Val Loss
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/273988b6-7ce0-4df0-8d91-ad0b3fabc66e/Screen_Shot_2020-07-08_at_3.46.20_AM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/273988b6-7ce0-4df0-8d91-ad0b3fabc66e/Screen_Shot_2020-07-08_at_3.46.20_AM.png)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-07-08_at_3.46.20_AM.png" width="40%">
+
+
 
 Multi-Layer CNN-1D with pre-padding Train and Val accuracy
 
