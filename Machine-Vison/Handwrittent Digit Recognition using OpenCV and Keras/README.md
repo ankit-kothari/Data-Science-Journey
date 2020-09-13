@@ -93,7 +93,7 @@ Model accuracy using the CNN turns out to be 98.76%
 - Complexity of gray level images is lower than that of color images. Features like brightness, contrast, edges, shape, contours, texture, perspective, shadows, and so on,  can be analyzed without addressing color. It is also computationally expensive
 - Also, many functions in openCV expects the image to be in grayscale.
 
-<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/hd2.png" width="40%">
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/hd14.png" width="40%">
 
 ### Applying Edge Detection
 
@@ -141,25 +141,25 @@ for rect in rects:
 
 This part extracts these images from the original picture, and reshapes it and feeds into the model to generate predictions and annotate the image with the predicted label
 
-<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/hd5.png" width="40%">
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/hd5.png" width="20%">
 
-<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/hd6.png" width="40%">
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/hd6.png" width="20%">
 
-<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/hd7.png" width="40%">
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/hd7.png" width="20%">
 
-<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/hd8.png" width="40%">
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/hd8.png" width="20%">
 
-<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/hd9.png" width="40%">
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/hd9.png" width="20%">
 
-<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/hd10.png" width="40%">
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/hd10.png" width="20%">
 
-<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/hd11.png" width="40%">
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/hd11.png" width="20%">
 
-<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/hd12.png" width="40%">
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/hd12.png" width="20%">
 
 ## Results
 
-<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/hd13.png" width="40%">
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/hd13.png" width="60%">
 
 
 Resources:
