@@ -35,7 +35,7 @@
 5. denormalize the image
 6. Clip the image so that it is in 0 to 1 range
 
-<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/st2.jpeg" width="40%">
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/st2.png" width="40%">
 
 ## Get Features for the intermediate layers for content and style layer outputs (Targets)
 
