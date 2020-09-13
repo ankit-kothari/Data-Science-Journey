@@ -40,7 +40,8 @@ Where Batch Size is 500 and Iterations is 4, for 1 complete epoch.**
 
 **example using NLP sentences:**
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a73325af-3b48-4b09-9116-9ead676b7b2c/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a73325af-3b48-4b09-9116-9ead676b7b2c/Untitled.png)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/deep_learning_embedding.png" width="40%">
+
 
 ## Declarations:
 
@@ -499,4 +500,4 @@ for i in range(32):
   ax= fig.add_subplot(4,8,i+1, xticks=[], yticks=[])
   plt.imshow(conv_cat[i])
 ```
-<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-07-08_at_1.31.21_AM.png" width="40%">
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/full_cat.png" width="40%">
