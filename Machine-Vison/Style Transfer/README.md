@@ -61,7 +61,7 @@ Gram Matrix :
 
 X^TX/N
 
-<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/st2.jpeg" width="80%">
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/st2.png" width="80%">
 
 
 ## Assigning weight to style and content layer loss
@@ -112,5 +112,5 @@ The gradients are calculated, loss with respect to input image and not the param
 
 ## Final Output
 
-<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/st_final.jpeg" width="40%">
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/st_final.png" width="40%">
 
