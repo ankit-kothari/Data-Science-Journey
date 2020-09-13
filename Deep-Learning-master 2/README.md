@@ -438,12 +438,11 @@ catbatch = np.expand_dims(img1, axis=0)
 print(f' expanded dims image shape {catbatch.shape}')
 plt.imshow(img1)
 ```
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/cat_before.png" width="50%">
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9adae4fd-f463-4c95-93f3-00ef8d2c7b2b/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9adae4fd-f463-4c95-93f3-00ef8d2c7b2b/Untitled.png)
+original image
 
-orignal Image 
-
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/edf4155b-e4ba-4b79-998e-7b16ab5f154d/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/edf4155b-e4ba-4b79-998e-7b16ab5f154d/Untitled.png)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/cat_after.png" width="50%">
 
 pre-processed image through pytorch
 
@@ -500,5 +499,4 @@ for i in range(32):
   ax= fig.add_subplot(4,8,i+1, xticks=[], yticks=[])
   plt.imshow(conv_cat[i])
 ```
-
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a44a3b53-a119-459e-a1cf-8273895fe4e5/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a44a3b53-a119-459e-a1cf-8273895fe4e5/Untitled.png)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-07-08_at_1.31.21_AM.png" width="40%">
