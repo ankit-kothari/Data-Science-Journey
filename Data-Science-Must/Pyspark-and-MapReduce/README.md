@@ -115,7 +115,7 @@ MapReduce efficiently distribute calculations over hundreds or thousands of comp
 
 - In Spark, the SparkContext object manages the connection to the clusters, and coordinates the running of processes on those clusters. More specifically, it connects to the cluster managers. The cluster managers control the executors that run the computations.
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/21ff79e8-64a6-483d-b4bb-cd1c72119808/Screen_Shot_2020-06-17_at_11.16.09_AM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/21ff79e8-64a6-483d-b4bb-cd1c72119808/Screen_Shot_2020-06-17_at_11.16.09_AM.png)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-06-17_at_11.16.09_AM.png" width="40%">
 
 - Spark  can run locally on your own computer. Spark will simulate distributing your calculations over many machines by automatically slicing your computer's memory into partitions.
 - Spark's RDD implementation also lets us evaluate code "lazily," meaning we can postpone running a calculation until absolutely necessary. The advantage of "lazy" evaluation is that we can build up a queue of tasks and let Spark optimize the overall workflow in the background. In regular Python, the interpreter can't do much workflow optimization.
@@ -174,7 +174,9 @@ Whenever we use an action method, Spark forces the evaluation of lazy code. If w
 
 ## Iterators, Generators, Yield
 
-[What does the "yield" keyword do?](https://stackoverflow.com/questions/231767/what-does-the-yield-keyword-do/231855#231855)
+[What does the "yield" keyword do?]
+
+(https://stackoverflow.com/questions/231767/what-does-the-yield-keyword-do/231855#231855)
 
 Any function that returns a sequence of data in PySpark (versus a guaranteed Boolean value, like filter() requires) must use a yield statement to specify the values that should be pulled later.
 
