@@ -6,7 +6,7 @@
 
 - For  style, the earlier layers provide for a more "localized" representation. This is opposed to the content model, where the later layers represent a more "global" structure.
 
-<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/st1.jpeg" width="40%">
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/st1.jpeg" width="80%">
 
 ## Creating  the VGG model function
 
