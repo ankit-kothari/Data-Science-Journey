@@ -78,11 +78,11 @@ model.compile(loss='categorical_crossentropy',
 
 Model accuracy using the CNN turns out to be 98.76%
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/da72e826-470b-41f4-acd2-a997afdae734/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/da72e826-470b-41f4-acd2-a997afdae734/Untitled.png)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/hd1.png" width="40%">
 
 ## LOADING IN THE SAMPLE IMAGE with HANDWRITTEN DIGIT's
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9082d3ed-ad7d-4a1a-b63a-d32afc5ee6e1/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9082d3ed-ad7d-4a1a-b63a-d32afc5ee6e1/Untitled.png)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/hd2.png" width="40%">
 
 ## IMAGE PREPROCESSING
 
@@ -93,7 +93,7 @@ Model accuracy using the CNN turns out to be 98.76%
 - Complexity of gray level images is lower than that of color images. Features like brightness, contrast, edges, shape, contours, texture, perspective, shadows, and so on,  can be analyzed without addressing color. It is also computationally expensive
 - Also, many functions in openCV expects the image to be in grayscale.
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/55707be8-f529-4e65-84e6-f4abda6e6ed8/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/55707be8-f529-4e65-84e6-f4abda6e6ed8/Untitled.png)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/hd2.png" width="40%">
 
 ### Applying Edge Detection
 
@@ -101,11 +101,11 @@ The most famous [edge detection](https://medium.com/sicara/opencv-edge-detection
 
 - Concept behind canny filtering
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/27229669-858e-43c5-b706-2f0db2adbb66/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/27229669-858e-43c5-b706-2f0db2adbb66/Untitled.png)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/hd3.png" width="40%">
 
 ### Using OpenCV's dilation to enhance the image
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/7b4c24ef-e708-4a89-898a-309bfc143b51/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/7b4c24ef-e708-4a89-898a-309bfc143b51/Untitled.png)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/hd4.png" width="40%">
 
 ### Contour Detection
 
@@ -141,25 +141,26 @@ for rect in rects:
 
 This part extracts these images from the original picture, and reshapes it and feeds into the model to generate predictions and annotate the image with the predicted label
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/51c69634-4b44-4c59-a0be-1b3d9432ffe0/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/51c69634-4b44-4c59-a0be-1b3d9432ffe0/Untitled.png)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/hd5.png" width="40%">
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/838dca58-ff9a-419e-9d8f-7e701d8192c7/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/838dca58-ff9a-419e-9d8f-7e701d8192c7/Untitled.png)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/hd6.png" width="40%">
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5cc1d961-0f38-4367-bd84-da7fbc137c05/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5cc1d961-0f38-4367-bd84-da7fbc137c05/Untitled.png)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/hd7.png" width="40%">
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/47fc4327-0f92-422c-ac27-c213fb712505/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/47fc4327-0f92-422c-ac27-c213fb712505/Untitled.png)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/hd8.png" width="40%">
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6262738e-8207-4339-bc49-35d21eae93fb/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6262738e-8207-4339-bc49-35d21eae93fb/Untitled.png)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/hd9.png" width="40%">
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/59b8388d-6c5d-4931-9576-6426079ccaa8/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/59b8388d-6c5d-4931-9576-6426079ccaa8/Untitled.png)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/hd10.png" width="40%">
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/826071c9-e0c2-4b0b-a596-396883646871/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/826071c9-e0c2-4b0b-a596-396883646871/Untitled.png)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/hd11.png" width="40%">
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a2d44501-3eff-4e5e-aab6-32b24e09a137/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a2d44501-3eff-4e5e-aab6-32b24e09a137/Untitled.png)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/hd12.png" width="40%">
 
 ## Results
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b772d344-2d27-4ebb-b5c2-c5960a15d7a5/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b772d344-2d27-4ebb-b5c2-c5960a15d7a5/Untitled.png)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/hd13.png" width="40%">
+
 
 Resources:
 
