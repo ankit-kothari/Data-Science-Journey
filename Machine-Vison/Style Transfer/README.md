@@ -6,7 +6,7 @@
 
 - For  style, the earlier layers provide for a more "localized" representation. This is opposed to the content model, where the later layers represent a more "global" structure.
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/0feb0811-f9e6-4a3d-a908-30094a227252/st1.jpeg](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/0feb0811-f9e6-4a3d-a908-30094a227252/st1.jpeg)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/st1.jpeg" width="40%">
 
 ## Creating  the VGG model function
 
@@ -37,7 +37,7 @@
 5. denormalize the image
 6. Clip the image so that it is in 0 to 1 range
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8ee47872-dc3d-4b1d-b2ba-c91b0687d25f/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8ee47872-dc3d-4b1d-b2ba-c91b0687d25f/Untitled.png)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/st1.jpeg" width="40%">
 
 ## Get Features for the intermediate layers for content and style layer outputs (Targets)
 
@@ -61,9 +61,10 @@ Gram Matrix :
 - Resulting Shape: (C,C)
 - This makes the network loses the spatial information and only keep the style features of the style image
 
-$$X^TX/N$$
+X^TX/N
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/eb242b54-5a78-4725-a8cf-5dadce9de997/899C3830-D192-4979-B960-94E9F8E1707D.jpeg](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/eb242b54-5a78-4725-a8cf-5dadce9de997/899C3830-D192-4979-B960-94E9F8E1707D.jpeg)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/st2.jpeg" width="80%">
+
 
 ## Assigning weight to style and content layer loss
 
@@ -113,4 +114,5 @@ The gradients are calculated, loss with respect to input image and not the param
 
 ## Final Output
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/be3f8eea-1708-44e4-bf52-099c0c315dcb/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/be3f8eea-1708-44e4-bf52-099c0c315dcb/Untitled.png)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/st_final.jpeg" width="40%">
+
