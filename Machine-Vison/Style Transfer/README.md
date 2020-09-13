@@ -1,5 +1,3 @@
-## pytorch Implementation
-
 [Google Colaboratory](https://colab.research.google.com/drive/1FPcPOsv0Vp9g_l4MXj3sag8UfXacslhk?usp=sharing)
 
 ## What is Style Transfer?
