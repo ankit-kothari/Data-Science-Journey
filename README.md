@@ -43,7 +43,7 @@ Tools: pandas, sqlite3, plotly, mapbox, data optimization
 
 **ML Algorithms:** Linear Regression, Logistic Regression, Decesion Tree Model, Random Forest, XGBoost, ANN
 
-**Feature Extractions:** Data Cleaning, Normalizing/Scaling of  the data, Binning, Correlation Matrix, Hyperparameter Tuning
+**Feature Extractions:** Data Cleaning, Normalizing/Scaling of  the data, Binning, Sampling, Correlation Matrix, Hyperparameter Tuning
 
 **Tools:** Python, Pandas, sklearn, keras, 
 
