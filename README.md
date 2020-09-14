@@ -3,7 +3,8 @@
 ## Data Science Journey
 
 🔗  LinkedIn: https://www.linkedin.com/in/ankit-kothari-510a9623
-📧  ankit256@gmail.com
+
+📧  Email: ankit256@gmail.com
 
 ## Data Science Must
 
