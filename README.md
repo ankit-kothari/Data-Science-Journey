@@ -8,11 +8,11 @@
 
 ## Data Science Must
 
-- [**Optimization of Large Datasets**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Data-Science-Must/optimizing-large-datasets):** Process Pools, Threading, Downcasting, Memory optimization
-- [**Github**](https://medium.com/@ankitkothari_92911/git-crash-course-that-will-make-your-life-easy-97273565c95e):** Squashing, Rebasing, Merging, fetch, remote,
+- [**Optimization of Large Datasets**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Data-Science-Must/optimizing-large-datasets):Process Pools, Threading, Downcasting, Memory optimization
+- [**Github**](https://medium.com/@ankitkothari_92911/git-crash-course-that-will-make-your-life-easy-97273565c95e):Squashing, Rebasing, Merging, fetch, remote,
 - [**Docker**](https://medium.com/@ankitkothari_92911/docker-how-much-do-we-need-to-know-as-data-scientists-d5f695061ee8) :Creating a Dockerfile, images  running containers.
 - [**Shapes in Deep Learning**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Deep-Learning-master%202):Exploring all the Deep Learning Archtecture and their output shapes
-- [**Basics of Spark and Map Reduce**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Data-Science-Must/Pyspark-and-MapReduce):** Exploring Basiscs of Pyspark and how to manipulate data using Transformations and Actions
+- [**Basics of Spark and Map Reduce**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Data-Science-Must/Pyspark-and-MapReduce):Exploring Basiscs of Pyspark and how to manipulate data using Transformations and Actions
 
 Tools: Github, Docker, Pyspark, pandas, plotly
 
