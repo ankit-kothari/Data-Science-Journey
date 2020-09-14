@@ -4,10 +4,10 @@
 
 ## Data Science Must
 
-- [**Optimization of Large Datasets](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Data-Science-Must/optimizing-large-datasets):** Process Pools, Threading, Downcasting, Memory optimization
+- [**Optimization of Large Datasets**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Data-Science-Must/optimizing-large-datasets):** Process Pools, Threading, Downcasting, Memory optimization
 - [**Github**](https://medium.com/@ankitkothari_92911/git-crash-course-that-will-make-your-life-easy-97273565c95e):** Squashing, Rebasing, Merging, fetch, remote,
-- [**Docker**](https://medium.com/@ankitkothari_92911/docker-how-much-do-we-need-to-know-as-data-scientists-d5f695061ee8) :** Creating a Dockerfile, images  running containers.
-- [**Shapes in Deep Learning**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Deep-Learning-master%202):** Exploring all the Deep Learning Archtecture and their output shapes
+- [**Docker**](https://medium.com/@ankitkothari_92911/docker-how-much-do-we-need-to-know-as-data-scientists-d5f695061ee8) :Creating a Dockerfile, images  running containers.
+- [**Shapes in Deep Learning**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Deep-Learning-master%202):Exploring all the Deep Learning Archtecture and their output shapes
 - [**Basics of Spark and Map Reduce**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Data-Science-Must/Pyspark-and-MapReduce):** Exploring Basiscs of Pyspark and how to manipulate data using Transformations and Actions
 
 Tools: Github, Docker, Pyspark, pandas, plotly
@@ -34,8 +34,8 @@ Tools: pandas, sqlite3, plotly, mapbox, data optimization
 
 ## Machine Learning
 
-- [**Bike Rental Prediction**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Machine-Learning/predicting_bike_rentals): Comparing Decesion Treed Models and Enssemble Methods using Random Forest to predict the bike rentals at a given hour of the day**
-- [**Credit Risk Analysis:**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Machine-Learning/Credit-Risk-Analysis-master)  **Comparing and exploring Hyperparameters to tune Logistic Regression, XGBoost and Artificial Nueral Network  to predict whether a lender will pay their loan back. Uses publically available data from [LendingClub.com](http://lendingclub.com/)**
+- [**Bike Rental Prediction**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Machine-Learning/predicting_bike_rentals): Comparing Decesion Treed Models and Enssemble Methods using Random Forest to predict the bike rentals at a given hour of the day
+- [**Credit Risk Analysis:**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Machine-Learning/Credit-Risk-Analysis-master)  Comparing and exploring Hyperparameters to tune Logistic Regression, XGBoost and Artificial Nueral Network  to predict whether a lender will pay their loan back. Uses publically available data from [LendingClub.com](http://lendingclub.com/)
 
 **ML Algorithms:** Linear Regression, Logistic Regression, Decesion Tree Model, Random Forest, XGBoost, ANN
 
