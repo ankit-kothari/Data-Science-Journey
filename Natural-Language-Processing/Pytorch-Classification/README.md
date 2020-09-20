@@ -2,7 +2,6 @@
 
 PyTorch: NLP: Part 6 Multi Class Text Classification with variable sized sequences. 
 
-[Google Colaboratory](https://colab.research.google.com/drive/1f__k2hFhzJhEPisVCs-FgGcYXTgM9BWN?usp=sharing)
 
 ## Intended Audience
 
