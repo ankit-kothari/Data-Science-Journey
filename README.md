@@ -18,7 +18,7 @@ Tools: Github, Docker, Pyspark, pandas, plotly
 
 ## Data Exploration, Analysis and Visualization
 
-### H1B Data Analysis(https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Data%20Exploration%20Analysis%20and%20Visualization/H1B-Data-Analysis-master)
+### [**H1B Data Analysis**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Data%20Exploration%20Analysis%20and%20Visualization/H1B-Data-Analysis-master)
 
 - [**Loading and Optimization of H1B data file**](https://github.com/ankit-kothari/Data-Science-Journey/blob/master/Data%20Exploration%20Analysis%20and%20Visualization/H1B-Data-Analysis-master/Loading_and_Optimization_of_H1B_data_file.ipynb): data profiling,downcasting, converting columns to the most optimized data type, droping unused columns among other techniques.
 - [**H1B Data Analysis using MySQL**](https://github.com/ankit-kothari/Data-Science-Journey/blob/master/Data%20Exploration%20Analysis%20and%20Visualization/H1B-Data-Analysis-master/H1B_Data_Analysis_Using_MySQL.ipynb):  Exploring SQL window based functions like DENSE_RANK(), ROW_NUMBER(),  Partition, CASE statements, Views and Joins to explore interesting trends in the H1B data provided by USCIS
