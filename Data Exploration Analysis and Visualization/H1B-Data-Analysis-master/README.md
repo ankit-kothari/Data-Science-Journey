@@ -9,5 +9,7 @@
 N.B. This data is complied from the data available on the uscis website from 2009 to 2019, The data for 2019 is not complete so I have excluded it in most of my analysis
 
 ## Part 1: Loading and Optimization of H1B Data
+- data profiling,downcasting, converting columns to the most optimized data type, droping unused columns among other techniques. 
+- In the context of this file, it doesn't matter but this can be applicable and hugely benifitial for larger datasets. 
 
 <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/newplot.png" height="60%" width="60%">
