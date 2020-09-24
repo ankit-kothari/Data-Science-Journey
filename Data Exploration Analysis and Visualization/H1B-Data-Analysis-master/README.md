@@ -40,3 +40,11 @@ CREATE TABLE h1b (
 sqlite> 
 ```
 
+[## Part 3: H1B Data Analysis using SQL queries](https://github.com/ankit-kothari/Data-Science-Journey/blob/master/Data%20Exploration%20Analysis%20and%20Visualization/H1B-Data-Analysis-master/H1B_Data_Analysis_Using_MySQL.ipynb)
+Exploring SQL window based functions like DENSE_RANK(), ROW_NUMBER(), Partition, CASE statements, Views and Joins to explore interesting trends in the H1B data provided by USCIS:
+
+- Explored H1B usage across states, employers
+- Trends in denial rates pre 2016 and post 2016
+- Denial rates by US Employer and Indian IT companies
+- Employers dominating by State
+
