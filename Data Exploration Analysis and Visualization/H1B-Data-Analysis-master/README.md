@@ -10,4 +10,4 @@ N.B. This data is complied from the data available on the uscis website from 200
 
 ## Part 1: Loading and Optimization of H1B Data
 
-<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/h1boptimizedplot.png" height="60%" width="60%">
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/newplot.png" height="60%" width="60%">
