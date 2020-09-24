@@ -15,7 +15,7 @@ N.B. This data is complied from the data available on the uscis website from 200
 <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/newplot.png" height="60%" width="60%">
 
 ## Part 2: Data Profiling, Cleaning, Manipulations and loading into a SQL Database
-- Checked for null values
+- Checked for null values, unused columns, performed general agagregate analysis on the data. 
 - Added Longitude and Latitude colums using the google API for each of the states
 - Cleaned duplicate name convention for same employer using pandas vectorized functions and regex.
 - converted from pandas dataframe and exported into a SQL Database with the following schema
