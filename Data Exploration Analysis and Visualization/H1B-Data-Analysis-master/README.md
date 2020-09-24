@@ -8,13 +8,13 @@
 
 N.B. This data is complied from the data available on the uscis website from 2009 to 2019, The data for 2019 is not complete so I have excluded it in most of my analysis
 
-## Part 1: Loading and Optimization of H1B Data
+## [Part 1: Loading and Optimization of H1B Data](https://github.com/ankit-kothari/Data-Science-Journey/blob/master/Data%20Exploration%20Analysis%20and%20Visualization/H1B-Data-Analysis-master/Loading_and_Optimization_of_H1B_data_file.ipynb)
 - data profiling,downcasting, converting columns to the most optimized data type, droping unused columns among other techniques. 
 - In the context of this file, it doesn't matter but this can be applicable and hugely benifitial for larger datasets. 
 
 <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/newplot.png" height="60%" width="60%">
 
-## Part 2: Data Profiling, Cleaning, Manipulations and loading into a SQL Database
+## [Part 2: Data Profiling, Cleaning, Manipulations and loading into a SQL Database](https://github.com/ankit-kothari/Data-Science-Journey/blob/master/Data%20Exploration%20Analysis%20and%20Visualization/H1B-Data-Analysis-master/Data%20profiling_cleaning_manipulation_and_loading_into_a_SQL_database.ipynb)
 - Checked for null values, unused columns, performed general agagregate analysis on the data. 
 - Added Longitude and Latitude colums using the google API for each of the states
 - Cleaned duplicate name convention for same employer using pandas vectorized functions and regex.
