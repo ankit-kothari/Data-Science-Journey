@@ -20,7 +20,8 @@ N.B. This data is complied from the data available on the uscis website from 200
 - Cleaned duplicate name convention for same employer using pandas vectorized functions and regex.
 - converted from pandas dataframe and exported into a SQL Database with the following schema
 
-``` CREATE TABLE h1b (
+``` 
+CREATE TABLE h1b (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       Fiscal_Year datetime,
       Employer text,
