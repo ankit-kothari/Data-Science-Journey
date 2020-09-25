@@ -103,6 +103,7 @@ def normalize(subset):
 - scale_pos_weight parameter impose greater penalties for errors on the minor class
 
 <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/cr7.png" width="80%">
+
 ### Modeling in Keras for Binary Classification  Using Under Sampling
 
 <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/cr8.png" width="80%">
