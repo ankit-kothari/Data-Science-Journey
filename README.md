@@ -23,7 +23,12 @@ Tools: Github, Docker, Pyspark, pandas, plotly
 - [**Loading and Optimization of H1B data file**](https://github.com/ankit-kothari/Data-Science-Journey/blob/master/Data%20Exploration%20Analysis%20and%20Visualization/H1B-Data-Analysis-master/Loading_and_Optimization_of_H1B_data_file.ipynb): data profiling,downcasting, converting columns to the most optimized data type, droping unused columns among other techniques.
 - [**Data Profiling, Cleaning, Manipulation and loading into a SQL database**](https://github.com/ankit-kothari/Data-Science-Journey/blob/master/Data%20Exploration%20Analysis%20and%20Visualization/H1B-Data-Analysis-master/Data%20profiling_cleaning_manipulation_and_loading_into_a_SQL_database.ipynb): This workbook prepares the data before we analyze and get meaningful information out of it by using various pandas functions, vectorized methods to clean text with regex, aggregate functions like pivot and merge. Finally exporting the data to sqlite3 database.
 - [**H1B Data Analysis using SQL**](https://github.com/ankit-kothari/Data-Science-Journey/blob/master/Data%20Exploration%20Analysis%20and%20Visualization/H1B-Data-Analysis-master/H1B_Data_Analysis_Using_MySQL.ipynb):  Exploring SQL window based functions like DENSE_RANK(), ROW_NUMBER(),  Partition, CASE statements, Views and Joins to explore interesting trends in the H1B data provided by USCIS
-- H1B Data Trend Visualization using plotly, seaborn and matplotlib (coming soon)
+- [**H1B Data Trend Visualization using SQL and plotly**] Overview of the recent trends, Distribution of H1B visas among States, Distribution of H1B visa among Employers and How things changed post-2016 for States, US Employers, and Indian IT Sector.
+
+  [Code for Plots and SQL queries:](https://colab.research.google.com/drive/1BREsuISGVMJiQrdBH03KlO3OpMyzqqbN?usp=sharing)
+
+  [My Blog Article:](https://www.linkedin.com/pulse/some-interesting-h1b-trends-insights-ankit-kothari)
+
 - H1B Data Dashboard using Dash and Plotly (coming soon)
 
 Tools: pandas, sqlite3, plotly, mapbox, data optimization 
