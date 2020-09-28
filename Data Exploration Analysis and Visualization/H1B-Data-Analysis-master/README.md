@@ -51,6 +51,7 @@ Exploring SQL window based functions like DENSE_RANK(), ROW_NUMBER(), Partition,
 ## [Part 4: H1B Data Analysis Visualization using SQL queries and plotly](https://colab.research.google.com/drive/1BREsuISGVMJiQrdBH03KlO3OpMyzqqbN?usp=sharing)
 
 [Code for Plots and SQL queries:](https://colab.research.google.com/drive/1BREsuISGVMJiQrdBH03KlO3OpMyzqqbN?usp=sharing)
+
 [My Blog Article:](https://www.linkedin.com/pulse/some-interesting-h1b-trends-insights-ankit-kothari)
 
 - There has been a clear increase in denial rates post 2016. The increase in the denial rate is about 8% for Indian IT giants (average of top 5), whereas it was only about 1.5% for the US tech giants.
