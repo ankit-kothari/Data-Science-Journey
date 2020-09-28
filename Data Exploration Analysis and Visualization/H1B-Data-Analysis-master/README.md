@@ -48,3 +48,12 @@ Exploring SQL window based functions like DENSE_RANK(), ROW_NUMBER(), Partition,
 - Denial rates by US Employer and Indian IT companies
 - Employers dominating by State
 
+## [Part 4: H1B Data Analysis Visualization using SQL queries and plotly](https://colab.research.google.com/drive/1BREsuISGVMJiQrdBH03KlO3OpMyzqqbN?usp=sharing)
+
+Code for Plots and SQL queries:(https://colab.research.google.com/drive/1BREsuISGVMJiQrdBH03KlO3OpMyzqqbN?usp=sharing)
+My Blog Article:(https://www.linkedin.com/pulse/some-interesting-h1b-trends-insights-ankit-kothari)
+
+- There has been a clear increase in denial rates post 2016. The increase in the denial rate is about 8% for Indian IT giants (average of top 5), whereas it was only about 1.5% for the US tech giants.
+- The 5 States of California, Texas, New Jersy, New York, Illinois used 57% of the approved H1B visas. I think the policies should be made to have a fair distribution of these visas among the States, which will give a boost to the economy of smaller states. 39 of the 58 States+Islands have used less than 1% each of the total approved H1Bs from 2008-2019.
+- There are ~265149 unique Employers but the top 20 employers used up to 25% of the total H1B visas from 2009-2018. I think salary should not be the only criteria to award an H1B, This is kind of unfair for smaller and medium scale enterprises who cannot afford 100k + or 150k+ salaries. They will not be able to use the so-called "Speciality Occupation" This will result in the H1B program being dominated by the top 20-50 tech giants in the US.
+
