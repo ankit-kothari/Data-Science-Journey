@@ -25,13 +25,13 @@ Tools: Github, Docker, Pyspark, pandas, plotly
 - [**H1B Data Analysis using SQL**](https://github.com/ankit-kothari/Data-Science-Journey/blob/master/Data%20Exploration%20Analysis%20and%20Visualization/H1B-Data-Analysis-master/H1B_Data_Analysis_Using_MySQL.ipynb):  Exploring SQL window based functions like DENSE_RANK(), ROW_NUMBER(),  Partition, CASE statements, Views and Joins to explore interesting trends in the H1B data provided by USCIS
 - [**H1B Data Trend Visualization using SQL and plotly**](https://www.linkedin.com/pulse/some-interesting-h1b-trends-insights-ankit-kothari) Overview of the recent trends, Distribution of H1B visas among States, Distribution of H1B visa among Employers and How things changed post-2016 for States, US Employers, and Indian IT Sector.
 
-  [Code for Plots and SQL queries](https://colab.research.google.com/drive/1BREsuISGVMJiQrdBH03KlO3OpMyzqqbN?usp=sharing)
+  [**Code for Plots and SQL queries**](https://colab.research.google.com/drive/1BREsuISGVMJiQrdBH03KlO3OpMyzqqbN?usp=sharing)
 
-  [My Blog Article](https://www.linkedin.com/pulse/some-interesting-h1b-trends-insights-ankit-kothari)
+  [**My Blog Article**](https://www.linkedin.com/pulse/some-interesting-h1b-trends-insights-ankit-kothari)
 
-- H1B Data Dashboard using Dash and Plotly (coming soon)
+- [**H1B Data Dashboard using Dash and Plotly**](https://dash-app-h1bvisa.herokuapp.com/) A Dash plotly app/Dashboard which is hosted on heroku and can be used to determine various trends regarding H1B visa by selecting the Employer from the drop down visa.
 
-Tools: pandas, sqlite3, plotly, mapbox, data optimization 
+Tools: pandas, sqlite3, plotly, mapbox, data optimization, DASH, Heroku
 
 ## Probablity and Statistics
 
