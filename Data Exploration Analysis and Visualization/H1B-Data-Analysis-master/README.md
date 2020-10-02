@@ -58,3 +58,10 @@ Exploring SQL window based functions like DENSE_RANK(), ROW_NUMBER(), Partition,
 - The 5 States of California, Texas, New Jersy, New York, Illinois used 57% of the approved H1B visas. I think the policies should be made to have a fair distribution of these visas among the States, which will give a boost to the economy of smaller states. 39 of the 58 States+Islands have used less than 1% each of the total approved H1Bs from 2008-2019.
 - There are ~265149 unique Employers but the top 20 employers used up to 25% of the total H1B visas from 2009-2018. I think salary should not be the only criteria to award an H1B, This is kind of unfair for smaller and medium scale enterprises who cannot afford 100k + or 150k+ salaries. They will not be able to use the so-called "Speciality Occupation" This will result in the H1B program being dominated by the top 20-50 tech giants in the US.
 
+## [Part 5: DASH app/Dashboard](https://dash-app-h1bvisa.herokuapp.com/) 
+
+[**Code**](https://github.com/ankit-kothari/Data-Science-Journey/blob/master/Data%20Exploration%20Analysis%20and%20Visualization/H1B-Data-Analysis-master/H1B_Dash_Dashboard.ipynb)
+
+- A Dash plotly app/Dashboard which is hosted on heroku and can be used to determine various trends regarding H1B visa by selecting the Employer from the drop down visa.
+
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/newplot.png" height="60%" width="60%">
