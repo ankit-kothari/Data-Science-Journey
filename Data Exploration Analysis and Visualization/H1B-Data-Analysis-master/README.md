@@ -64,4 +64,4 @@ Exploring SQL window based functions like DENSE_RANK(), ROW_NUMBER(), Partition,
 
 - A Dash plotly app/Dashboard which is hosted on heroku and can be used to determine various trends and visualization regarding H1B visa by selecting the Employer from the drop down visa.
 
-<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/dash.png" height="60%" width="60%">
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/dash.png" height="80%" width="80%">
