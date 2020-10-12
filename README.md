@@ -18,7 +18,7 @@ Tools: Github, Docker, Pyspark, pandas, plotly
 
 ## Data Exploration, Analysis and Visualization
 
-### [**H1B Data Analysis**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Data%20Exploration%20Analysis%20and%20Visualization/H1B-Data-Analysis-master)
+### [**H1B Data Analysis**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Data%20Exploration%20Analysis%20and%20Visualization/H1B-Data-Analysis-master) The raw data has been downloaded from the USCIS Website which has an individual csv file for each year. It has data regaridng Employers, Initial Approvals, Continuing Approvals, Initial Denials, Continuing Denials, and demographic data. 
 
 - [**Loading and Optimization of H1B data file**](https://github.com/ankit-kothari/Data-Science-Journey/blob/master/Data%20Exploration%20Analysis%20and%20Visualization/H1B-Data-Analysis-master/Loading_and_Optimization_of_H1B_data_file.ipynb): data profiling,downcasting, converting columns to the most optimized data type, droping unused columns among other techniques.
 - [**Data Profiling, Cleaning, Manipulation and loading into a SQL database**](https://github.com/ankit-kothari/Data-Science-Journey/blob/master/Data%20Exploration%20Analysis%20and%20Visualization/H1B-Data-Analysis-master/Data%20profiling_cleaning_manipulation_and_loading_into_a_SQL_database.ipynb): This workbook prepares the data before we analyze and get meaningful information out of it by using various pandas functions, vectorized methods to clean text with regex, aggregate functions like pivot and merge. Finally exporting the data to sqlite3 database.
