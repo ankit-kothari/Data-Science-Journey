@@ -64,7 +64,7 @@ Tools: pandas, sqlite3, plotly, mapbox, data optimization, DASH, Heroku
 - [**Data Cleaning, Extraction and Topic Modeling**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Natural-Language-Processing/Data-Cleaning-Extraction)
 - [**Spacy Playground**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Natural-Language-Processing/Spacy)
 - [**Topic Modeling**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Natural-Language-Processing/Topic-Modeling)
-- [**Chatbots**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Natural-Language-Processing/chatbots)
+- [**Chatbots**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Natural-Language-Processing/chatbots) Using 4 different archtitectures, TF-IDF, Word Embeddings, Sentence Embeddings, and TF-hub sentence Encoders, compare the efficiency of all these models. 
 - [**Pytorch approach to classification**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Natural-Language-Processing/Pytorch-Classification)
 - [**TF2.0 and Keras approach to classification**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Natural-Language-Processing/TF2-Classification)
 - [**Multi Label classification using distilBERT**](https://github.com/ankit-kothari/Data-Science-Journey/blob/master/Natural-Language-Processing/Transformers/NLP_Part_7_Classification_with_pytorch_using_distilBERT.ipynb)
