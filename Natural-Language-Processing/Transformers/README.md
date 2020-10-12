@@ -26,6 +26,6 @@
        
        
  ### Using the pre Trained Encoder Output, passing it through a classificatio model as features to classify
- - Using a simple ANN network created a Multi classification model using the features from the pre-trained a distilBERT library 
+ - Using a simple ANN network created a Multi classification model using the features from the pre-trained a distilBERT library as Inputs and labels as Targets
    
  
