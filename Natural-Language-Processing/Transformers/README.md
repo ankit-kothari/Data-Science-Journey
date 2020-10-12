@@ -1,6 +1,17 @@
 
 ## Transfer Learning using Transformer Based Model
 
+### Dataset Cleaning and Extraction
+
+[NLP PART1: Data Cleaning, Extraction and Topic Modeling](https://www.notion.so/NLP-PART1-Data-Cleaning-Extraction-and-Topic-Modeling-bb571ba8ed4c4014bc7243c5a0d1f233)
+
+- The shape of the initial dataset is (2999999, 3) reviews with columns ['rating',' title', 'review']
+- Extracted all reviews with the word or mention of Amazon  to reduce the dataset to  (112106, 3)
+- Performed text cleaning.
+- Performed Topic Modeling on the dataset using NMF and assigned topics to all the reviews.
+- Filtere the data with the following categories  ['books', 'video-quality', 'refund-and-return', 'movies', 'music', 'games']
+- The following classification task models the data to predict one of the above categories.
+
 ### distilBERT
 - the Hugging Face library seems to be the most widely accepted and powerful pytorch interface for working with distilBERT. In addition to supporting a variety of different pre-trained language models (and future models to come - distilBERT will not be state of the art forever), the library also includes pre-built modifications of distilBERT suited to your specific task. For example, in this tutorial we will use BertForSequenceClassification, but the library also includes distilBERT modifications designed for token classification, question answering, next sentence prediciton, etc. Using these pre-built classes simplifies the process of modifying distilBERT for your purposes.
 
