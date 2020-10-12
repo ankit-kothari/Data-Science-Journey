@@ -67,10 +67,9 @@ Tools: pandas, sqlite3, plotly, mapbox, data optimization, DASH, Heroku
 - [**Chatbots**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Natural-Language-Processing/chatbots)
 - [**Pytorch approach to classification**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Natural-Language-Processing/Pytorch-Classification)
 - [**TF2.0 and Keras approach to classification**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Natural-Language-Processing/TF2-Classification)
-- **Seq2Seq with Attention** (coming soon)
-- **BERT a TANSFORMER** (coming soon)
+-[**Multi Label classification using distilBERT**](https://github.com/ankit-kothari/Data-Science-Journey/blob/master/Natural-Language-Processing/Transformers/NLP_Part_7_Classification_with_pytorch_using_distilBERT.ipynb)
 
-**Deep Learning  Algorithms:** LSTM, BiLSTM, 1D-CNN, GRU, Word Embeddings, Sentence Encoders, TF-IDF, LDA, NMF
+**Deep Learning  Algorithms:** distilBERT,BERT, LSTM, BiLSTM, 1D-CNN, GRU, Word Embeddings, Sentence Encoders, TF-IDF, LDA, NMF
 
 **Text Analysis:** Text Cleaning using spacy, NER, POS, Text Classification, Chatbots, Topic Modeling
 
