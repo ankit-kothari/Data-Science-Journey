@@ -53,7 +53,7 @@ Tools: pandas, sqlite3, plotly, mapbox, data optimization, DASH, Heroku
 - [**Bike Rental Prediction**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Machine-Learning/predicting_bike_rentals): Comparing Decesion Treed Models and Enssemble Methods using Random Forest to predict the bike rentals at a given hour of the day
 - [**Credit Risk Analysis:**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Machine-Learning/Credit-Risk-Analysis-master)  Comparing and exploring Hyperparameters to tune Logistic Regression, XGBoost and Artificial Nueral Network  to predict whether a lender will pay their loan back. Uses publically available data from [LendingClub.com](http://lendingclub.com/)
 
-**ML Algorithms:** Linear Regression, Logistic Regression, Decesion Tree Model, Random Forest, XGBoost, ANN
+**ML Algorithms:** Linear Regression, Logistic Regression, Decesion Tree Model, Random Forest, XGBoost, ANN, Ensemble Models
 
 **Feature Extractions:** Data Cleaning, Normalizing/Scaling of  the data, Binning, Sampling, Correlation Matrix, Hyperparameter Tuning
 
