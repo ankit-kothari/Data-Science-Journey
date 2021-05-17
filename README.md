@@ -22,13 +22,9 @@ Tools: Github, Docker, Pyspark, pandas, plotly
 **The raw data has been downloaded from the USCIS Website which has an individual csv file for each year. It has data regaridng Employers, Initial Approvals, Continuing Approvals, Initial Denials, Continuing Denials, and demographic data. The goal of this analysis is to look at different trends around H1B visas touching Employers and States**
 
   [**Code for Plots and SQL queries**](https://colab.research.google.com/drive/1BREsuISGVMJiQrdBH03KlO3OpMyzqqbN?usp=sharing)
-
   [**My Blog Article**](https://www.linkedin.com/pulse/some-interesting-h1b-trends-insights-ankit-kothari)
-
-- [**H1B Data Dashboard using Dash and Plotly**](https://dash-app-h1bvisa.herokuapp.com/) A **Dash plotly app/Dashboard** which is hosted on heroku and can be used to determine various trends regarding H1B visa by selecting the Employer from the drop down menu.
-
+  [**H1B Data Dashboard using Dash and Plotly**](https://dash-app-h1bvisa.herokuapp.com/) A **Dash plotly app/Dashboard** which is hosted on heroku and can be used to determine various trends regarding H1B visa by selecting the Employer from the drop down menu.
   [**Code**](https://github.com/ankit-kothari/Data-Science-Journey/blob/master/Data%20Exploration%20Analysis%20and%20Visualization/H1B-Data-Analysis-master/H1B_Dash_Dashboard.ipynb)
-
   [**Dashboard**](https://dash-app-h1bvisa.herokuapp.com/) 
 
 
