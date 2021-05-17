@@ -25,6 +25,9 @@ Tools: Github, Docker, Pyspark, pandas, plotly
   - [**My Blog Article**](https://www.linkedin.com/pulse/some-interesting-h1b-trends-insights-ankit-kothari)
   - [**H1B Data Dashboard using Dash and Plotly**](https://dash-app-h1bvisa.herokuapp.com/) A **Dash plotly app/Dashboard** which is hosted on heroku and can be used to determine various trends regarding H1B visa by selecting the Employer from the drop down menu.
   - [**Code**](https://github.com/ankit-kothari/Data-Science-Journey/blob/master/Data%20Exploration%20Analysis%20and%20Visualization/H1B-Data-Analysis-master/H1B_Dash_Dashboard.ipynb)
+
+### [**INR-USD Trend Analysis 2000-2020**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/data_science_story/inr_usd_2000_2020) 
+  **This project visualizes how INR changed in the last 20 years under three different Prime Minister of India**
   
 
 Tools: pandas, sqlite3, plotly, mapbox, data optimization, DASH, Heroku
