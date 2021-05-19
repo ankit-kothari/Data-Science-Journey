@@ -26,7 +26,7 @@ Tools: Github, Docker, Pyspark, pandas, plotly
 ### - [**INR-USD Trend Analysis 2000-2020**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/data_science_story/inr_usd_2000_2020) 
   **This project visualizes how INR changed in the last 20 years under three different Prime Minister of India**
   
-### - [**Determining which segments would increase sales the most and target them with ads in social media.**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/data_science_story/best_customers)
+### - [**Identifying customer segments that would increase sales the most and target them with ads in social media.**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/data_science_story/best_customers)
 
 Tools: pandas, sqlite3, plotly, mapbox, data optimization, DASH, Heroku
 
