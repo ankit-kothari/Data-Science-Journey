@@ -14,7 +14,7 @@
 
 Tools: Github, Docker, Pyspark, pandas, plotly
 
-## Data Exploration, Analysis and Visualization
+## Data Exploration, Analysis and Visualization(https://github.com/ankit-kothari/Data-Science-Journey/blob/master/data_science_story/README.md)
 
 ### - [**H1B Data Analysis**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Data%20Exploration%20Analysis%20and%20Visualization/H1B-Data-Analysis-master) 
 **The raw data has been downloaded from the USCIS Website which has an individual csv file for each year. It has data regaridng Employers, Initial Approvals, Continuing Approvals, Initial Denials, Continuing Denials, and demographic data. The goal of this analysis is to look at different trends around H1B visas touching Employers and States**
