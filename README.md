@@ -1,4 +1,4 @@
-<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/photo-1456953180671-730de08edaa7.jpeg" height="15%" width="100%">
+#<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/photo-1456953180671-730de08edaa7.jpeg" height="15%" width="100%">
 
 ## Data Science Journey
 
