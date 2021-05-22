@@ -9,7 +9,7 @@ Develop a prototye to improve the revenue of undervalued apps to motivate the de
 - We found one erroneous data point which not only wasn't important, it was easy to fix. We should monitor this if management decides to move forward with the project to make sure it doesn't become an issue later on.
 - We also found quite a few duplicates that were relatively easy to handle, but it would be better to deal with this from the start, lest it becomes a hard-to-manage problem.
     
-## **Strategy (Overview of what we did, features we considered)**
+## **Strategy**
 - In order to limit the scope of this prototype, we included only four more features in our analysis: the ratings, the affordability, the categories, and the genres.
 - We separated the data into price groups and broke those down according to category and genre to determine the candidates for price increases.
 
