@@ -158,18 +158,18 @@ Alternating Least Squares method is used, First we update the W and b matrix and
 
 ### Training Loss
 
-![training_loss_plot.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1e203cc4-31b0-46f3-97e8-5c7cd2757093/training_loss_plot.png)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/training_loss_plot.png" width="80%">
 
 ### Testing Loss
-
-![test_loss_plot.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/92a7fe93-b73c-4a05-8d36-f9063245b82d/test_loss_plot.png)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/test_loss_plot.png" width="80%">
 
 ### Results and Discussion
 
 - **The data was split into Train, and Test data, with 60% used on training and the remaining 40% on test data. The gradient descent optimization algorithm trained the weights for the User Matrix, Movie Matrix, User Bias Matrix, and Movie Bias Matrix. It took about 110 epochs at a learning rate of 0.01 and a regularization parameter of 0.01. After all the vectorization and data compression techniques, it took each epoch about 3 minutes to iterate over the entire training dataset and compute Train and test loss, which is excellent given no cloud computing was used.**
 - **The results on the prediction set were very encouraging. The below graph shows that if a user rated a particular movie 0.5, it got the least predicted rating on an average. In contrast, if the user rated a movie 5, it got the highest predicted rating on an average. So in this scenario, it will be able to rank the movies in order of a user preference which is essential. This will work great for a recommendation use case since the relative ranking is more important than the actual ranking itself, and this model can do it.**
 
-![newplot (15).png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/91f0dace-297f-4638-8771-5ce3db88476c/newplot_(15).png)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/actual_rating_vs_avg_predicted_rating_plot.png" width="80%">
+
 
 ### Future Directions
 
