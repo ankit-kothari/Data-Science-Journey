@@ -31,7 +31,7 @@ The dataset was gigantic to fit in the computer's memory (no GPUs were used). Th
     | float 32 | 0 | 1 |
     | float 64 | 1 | 0 |
 
-![Comparison of Memory Usage before and after Datatype Downcasting](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f49a0e1a-b34c-4cc6-9c77-3fc88adfc413/Screen_Shot_2022-05-14_at_10.01.48_AM.png)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/mu.png" width="80%">
 
 Comparison of Memory Usage before and after Datatype Downcasting
 
@@ -79,7 +79,7 @@ Comparison of Memory Usage before and after Datatype Downcasting
     
 - **Cost Function**
     
-    ![Screen Shot 2022-05-16 at 4.14.26 PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/340b649f-015f-4692-a0d2-0f6ea3815b54/Screen_Shot_2022-05-16_at_4.14.26_PM.png)
+    <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/cost.png" width="80%">
     
 
 **The descriptive version of the cost function.**
@@ -103,7 +103,7 @@ Alternating Least Squares method is used, First we update the W and b matrix and
 
 - **Gradient of the User Matrix**
     
-    ![Screen Shot 2022-05-16 at 6.48.51 AM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e3bd0b98-bb81-4d4e-bd4a-f39c14cc2fd9/Screen_Shot_2022-05-16_at_6.48.51_AM.png)
+   <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/w.png" width="80%">
     
     - updated `**user_matrix**` = $user\_matrix – eta* user\_matrix\_gradient$ **where,**
         
@@ -111,7 +111,7 @@ Alternating Least Squares method is used, First we update the W and b matrix and
         
 - **Gradient of the User Bias**
     
-    ![Screen Shot 2022-05-16 at 6.51.32 AM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/87a9dfcc-8fc1-4ad7-9477-4092c84c6fc4/Screen_Shot_2022-05-16_at_6.51.32_AM.png)
+    <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/b.png" width="80%">
     
     - updated : **`user_bias` = $user\_bias – eta * user\_bias\_gradient$  where,**
         - **`user_bias_gradient` =$(-2/user\_mean\_vector) * (actual – predicted – movie\_bias – global\_mean)+ 2* lambda*user\_bias$**
@@ -120,13 +120,13 @@ Alternating Least Squares method is used, First we update the W and b matrix and
     
 - **Gradient of the Movie Matrix**
     
-    ![Screen Shot 2022-05-16 at 4.22.13 PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ce78276d-1925-43c9-a38b-967ef7eb2790/Screen_Shot_2022-05-16_at_4.22.13_PM.png)
+    <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/U.png" width="80%">
     
     - updated `**movie_matrix**` = $movie\_matrix - eta*movie\_matrix\_gradient$ **where,**
         - **movie_matrix_gradient = $(-2/total\_rows) *(actual\_rating - predicted\_rating – user\_bias-movie\_bias– global\_mean).T * user\_matrix + 2* lambda* movie\_matrix$**
 - **Gradient of the Movie Bias**
     
-    ![Screen Shot 2022-05-16 at 4.22.53 PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/547d0868-bdb8-4d87-ae01-89aa547c64c8/Screen_Shot_2022-05-16_at_4.22.53_PM.png)
+    <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/c.png" width="80%">
     
     - updated **`movie_bias` = movie_bias – eta * movie_bias_gradient, where**
         - `**movie_bias_gradient` =$(-2/ movie\_mean\_vector ) * (actual – predicted – user\_bias – global\_mean) + 2*lambda* movie\_bias$**
