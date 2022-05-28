@@ -116,8 +116,7 @@ Alternating Least Squares method is used, First we update the W and b matrix and
     - updated : **`user_bias` = $user\_bias – eta * user\_bias\_gradient$  where,**
         - **`user_bias_gradient` =$(-2/user\_mean\_vector) * (actual – predicted – movie\_bias – global\_mean)+ 2* lambda*user\_bias$**
     
-    where `**user_mean_vector**` is the number of movies each user has watched, so we divide the sum of total ratings from the movies by a particular user divided by the total movies the user has rated, to give an individual user bias. 
-    
+    where `**user_mean_vector**` is the number of movies each user has watched, so we divide the sum of total ratings from the movies by a particular user divided by the total movies the user has rated, to give an individual user bias.    
 - **Gradient of the Movie Matrix**
     
     <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/U.png" width="80%">
