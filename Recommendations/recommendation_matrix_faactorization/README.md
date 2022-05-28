@@ -103,7 +103,7 @@ Alternating Least Squares method is used, First we update the W and b matrix and
 
 - **Gradient of the User Matrix**
     
-   <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/w.png" width="80%">
+   <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/mu.png" width="80%">
     
     - updated `**user_matrix**` = $user\_matrix – eta* user\_matrix\_gradient$ **where,**
         
