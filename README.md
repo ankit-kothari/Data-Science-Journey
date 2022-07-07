@@ -14,7 +14,7 @@
 
 Tools: Github, Docker, Pyspark, pandas, plotly
 
-## [**Data Exploration, Analysis and Visualization**](https://github.com/ankit-kothari/Data-Science-Journey/blob/master/data_science_story/README.md)
+## [**Data Exploration, Analysis and Visualization**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Data%20Cleaning%20Analysis%20and%20Visualization)
 
 ### 1. [**H1B Data Analysis**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Data%20Cleaning%20Analysis%20and%20Visualization/H1B%20Visa%20Analysis%20) 
 **The raw data has been downloaded from the USCIS Website which has an individual csv file for each year. It has data regaridng Employers, Initial Approvals, Continuing Approvals, Initial Denials, Continuing Denials, and demographic data. The goal of this analysis is to look at different trends around H1B visas touching Employers and States**
@@ -62,6 +62,7 @@ Tools: pandas, sqlite3, plotly, mapbox, data optimization, DASH, Heroku
 - [**Pytorch approach to classification**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Natural-Language-Processing/Pytorch-Classification)
 - [**TF2.0 and Keras approach to classification**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Natural-Language-Processing/TF2-Classification)
 - [**Multi Label classification using distilBERT**](https://github.com/ankit-kothari/Data-Science-Journey/blob/master/Natural-Language-Processing/Transformers/NLP_Part_7_Classification_with_pytorch_using_distilBERT.ipynb)
+- [**Experiments with Transformers and Hugging Face**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Natural-Language-Processing/Transformers)
 
 **Deep Learning  Algorithms:** distilBERT,BERT, LSTM, BiLSTM, 1D-CNN, GRU, Word Embeddings, Sentence Encoders, TF-IDF, LDA, NMF
 
