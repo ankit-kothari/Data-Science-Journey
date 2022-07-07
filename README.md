@@ -16,19 +16,19 @@ Tools: Github, Docker, Pyspark, pandas, plotly
 
 ## [**Data Exploration, Analysis and Visualization**](https://github.com/ankit-kothari/Data-Science-Journey/blob/master/data_science_story/README.md)
 
-### 1. [**H1B Data Analysis**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Data%20Exploration%20Analysis%20and%20Visualization/H1B-Data-Analysis-master) 
+### 1. [**H1B Data Analysis**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Data%20Cleaning%20Analysis%20and%20Visualization/H1B%20Visa%20Analysis%20) 
 **The raw data has been downloaded from the USCIS Website which has an individual csv file for each year. It has data regaridng Employers, Initial Approvals, Continuing Approvals, Initial Denials, Continuing Denials, and demographic data. The goal of this analysis is to look at different trends around H1B visas touching Employers and States**
 
   - [**Visualizations using Plotly**](https://colab.research.google.com/drive/1BREsuISGVMJiQrdBH03KlO3OpMyzqqbN?usp=sharing)
   - [**My Blog Article**](https://www.linkedin.com/pulse/some-interesting-h1b-trends-insights-ankit-kothari)
   - [**H1B Data Dashboard using Dash and Plotly**](https://dash-app-h1bvisa.herokuapp.com/) 
   
-### 2. [**INR-USD Trend Analysis 2000-2020**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/data_science_story/inr_usd_2000_2020) 
+### 2. [**INR-USD Trend Analysis 2000-2020**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Data%20Cleaning%20Analysis%20and%20Visualization/Currency%20Trend%20Analysis%20(INR%20vs%20USD)) 
   **This project visualizes how INR changed in the last 20 years under three different Prime Minister of India**
   
-### 3. [**Identifying customer segments that would increase sales the most and target them with ads in social media.**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/data_science_story/best_customers)
+### 3. [**Identifying customer segments that would increase sales the most and target them with ads in social media.**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Data%20Cleaning%20Analysis%20and%20Visualization/Identify%20Customers%20for%20Promotion)
 
-### 4. [**Identify Undervalued apps to Improve Revenue**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/data_science_story/Identify_undervalued_apps)
+### 4. [**Identify Undervalued apps to Improve Revenue**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Data%20Cleaning%20Analysis%20and%20Visualization/Identify%20Undervalued%20Apps%20on%20Google%20Store)
 
 Tools: pandas, sqlite3, plotly, mapbox, data optimization, DASH, Heroku
 
