@@ -8,7 +8,7 @@
 - [**TF2.0 and Keras approach to classification**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Natural-Language-Processing/TF2-Classification)
 - [**Multi Label classification using distilBERT**](https://github.com/ankit-kothari/Data-Science-Journey/blob/master/Natural-Language-Processing/Transformers/NLP_Part_7_Classification_with_pytorch_using_distilBERT.ipynb)
 
-- [** Projects with Huggingface and Transformers **](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Natural-Language-Processing/Transformers)
+- [**Projects with Huggingface and Transformers**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Natural-Language-Processing/Transformers)
     - Named Entity Recognition
     - POS Tagging
     - Classification Probelms
