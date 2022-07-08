@@ -1,7 +1,7 @@
 **There are three notebooks attached in this Repo**
 
-1. without_stopwords_assignment_2_msml_deep_learning.ipynb
-2. with_stopwords_assignment_2_msml_deep_learning.ipynb
+1. without_stopwords_deep_learning.ipynb
+2. with_stopwords_deep_learning.ipynb
 3. assignment_2_msml_deep_learning.ipynb (Fine Tuning)
 
 ## Dataset
