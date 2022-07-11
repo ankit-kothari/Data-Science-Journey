@@ -65,8 +65,8 @@ Comparison of Memory Usage before and after Datatype Downcasting
     | Optimization Variables | Variable Name | Shape of the Matrix | Experimntal Initializaation  |
     | --- | --- | --- | --- |
     | User matrix | W | [NXK] | 12*np.random.random((N, K))/K |
-    | User bias |  U | [N,1] | 10*np.ones(N) |
-    | Movie matrix | b | [M X K] | 12*np.random.random((M, K))/K |
+    | User bias |  b | [N,1] | 10*np.ones(N) |
+    | Movie matrix | U | [M X K] | 12*np.random.random((M, K))/K |
     | Movie bias | c | [M,1] | 10*np.ones(M) |
     | Global mean | mu | mu (Scaler) |  |
     
