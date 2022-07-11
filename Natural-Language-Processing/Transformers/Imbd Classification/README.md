@@ -2,7 +2,8 @@
 
 1. without_stopwords_deep_learning.ipynb
 2. with_stopwords_deep_learning.ipynb
-3. assignment_2_msml_deep_learning.ipynb (Fine Tuning)
+3. fine_tuning_imdb_deep_learning.ipynb (Fine Tuning)
+4. custom_model_imdb_deep_learning.ipynb
 
 ## Dataset
 
@@ -42,3 +43,4 @@
 | DistilBERT Embedding +CNN Model 2 (Sequential) | YES | 83% |
 | DistilBERT Embedding +CNN Model 2 (Sequential) | NO | 82% |
 | DistilBERT Embedding Fine Tuning | YES | 89.80 % |
+| Custom Model with DistilBERT Embedding Fine Tuning | YES | 90.0 % |
