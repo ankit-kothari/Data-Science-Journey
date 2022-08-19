@@ -6,6 +6,19 @@
 
 - Selected dataset contains a fraction of user click log for news articles displayed in the Featured Tab of the Today   Module on Yahoo! Front Page (http://www.yahoo.com) during the first ten days in May 2009. The articles were chosen uniformly at random from a hand-picked pool of high-quality articles, which allows one to use a recently developed method to obtain an unbiased evaluation of an arbitrary bandit algorithm.
 
+- Columns
+  * timestamp: e.g., 1241160900
+  * displayed_article_id: e.g., 109513
+  * user_click (0 for no-click and 1 for click): e.g., 0
+  * strings "|user" and "|{article_id}" indicate the start of user
+  and article features
+  * features are encoded as "feature_id:feature_value" pairs, and feature_id starts from 1.
+
+- The pool of available articles for recommendation for each user visit is the set of articles that appear in that line of data. All user IDs (specifically, bcookies) are replaced by a common string 'user' so that no user information can be identified from this data.
+
+- Each user or article is associated with six features. Feature #1 is the constant (always 1) feature, and features #2-6 correspond to the 5 membership features constructed via conjoint analysis with a bilinear model.
+
+
 
 ### Traing a multi-arm bandits
 - In the learning phase, the algorithm,
@@ -33,9 +46,9 @@
 | Sampling Strateegy | CTR (Estimated) |
 | --- | --- |
 | Uniform Sampling | 2.9% |
-| Epsilon Gredy | 1 % |
-| UCB | 2.18% |
-| Thomson Sampling | 4% |
+| Epsilon Gredy | 3.14% |
+| UCB | 2.16% |
+| Thomson Sampling | 4.11% |
 
 ### Epsilon Gredy
 <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/eg.png" width="60%">
@@ -45,3 +58,13 @@
 
 ### Thompson Sampling
 <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/ts.png" width="60%">
+
+References:
+
+    [WSDM 2011] Unbiased Offline Evaluation of Contextual-bandit-based News Article Recommendation Algorithms https://arxiv.org/pdf/1003.5956.pdf
+
+"""
+
+- [**Beta Distribution — Intuition, Examples, and Derivation**](https://towardsdatascience.com/beta-distribution-intuition-examples-and-derivation-cf00f4db57af)
+- [**Bayesian Machine Learning in Python: A/B Testing**](https://www.udemy.com/course/bayesian-machine-learning-in-python-ab-testing/learn/lecture/32195648?start=0#announcements)
+
