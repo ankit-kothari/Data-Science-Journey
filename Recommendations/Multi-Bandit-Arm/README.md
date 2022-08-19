@@ -20,7 +20,7 @@
 
 
 
-### Traing a multi-arm bandits
+### Training a multi-arm bandits
 - In the learning phase, the algorithm,
         - Step 1 it selects an action and
         - Step 2 obtains a reward,
