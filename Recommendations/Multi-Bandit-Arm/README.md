@@ -2,12 +2,12 @@
 
 ## Multi-Arm Bandit
 
-### Dataset: R6A - Yahoo! Front Page Today Module User Click Log Dataset, version 1.0 (1.1 GB)
+### Dataset: R6A - Yahoo! Front Page Today Module User Click Log Dataset, version 1.0 
 
 - Selected dataset contains a fraction of user click log for news articles displayed in the Featured Tab of the Today   Module on Yahoo! Front Page (http://www.yahoo.com) during the first ten days in May 2009. The articles were chosen uniformly at random from a hand-picked pool of high-quality articles, which allows one to use a recently developed method to obtain an unbiased evaluation of an arbitrary bandit algorithm.
 
 
-### Traing a conteextual multi-arm bandits
+### Traing a multi-arm bandits
 - In the learning phase, the algorithm,
         - Step 1 it selects an action and
         - Step 2 obtains a reward,
