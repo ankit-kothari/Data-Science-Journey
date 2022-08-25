@@ -96,42 +96,13 @@ Before and After Transformation of Negative Count Feature
 
 The difference in Distribution in the measure of  Aggregated Sadness Value between the two labels
 
-## Modeling Experiment and Evaluation
-
-|  | Experiment | Recall  | Precision | F1 | Accuracy |
-| --- | --- | --- | --- | --- | --- |
-| Four Labels + No Stopwords + Only Last Comment  + Fine Tuning + Text Only  | exp1 | No Risk:  .76
-Low Risk:  0.0
-Moderate Risk:  0.09
-High Risk:  0.57 | No Risk:  0.43
-Low Risk : 0
-Moderate Risk:  0.25
-High Risk:  0.51 | No Risk:  0.55
-Low Risk:  0.00
-Moderate Risk:  0.13
-High Risk: 0.54 | 0.46 |
-| Four Labels + No Stopwords + Last Two Comments  + Fine Tuning + Text Only  | exp2 | No Risk: .72
-Low Risk : 0
-Moderate Risk : 0
-High Risk: .82 | No Risk: .56
-Low Risk : 0
-Moderate Risk : 0
-High Risk: .52 | No Risk: .63
-Low Risk : 0
-Moderate Risk : 0
-High Risk: .64 | 0.53 |
-| Binary Labels + No Stopwords + Last Two comments + Fine Tuning + Text Only  | exp3 | No Risk:  .40
-High Risk: .88 | No Risk: 0.53
-High Risk: 0.82 | No Risk: 0.45
-High Risk: 0.85 | .77 |
-| Binary Labels + No Stopwords + Last Two comments + Fine Tuning + Text Only + 2X tokens | exp4 | No Risk:  .72
-High Risk: .79 | No Risk: .53
-High Risk: .90 | No Risk: 0.61
-High Risk: 0.84 | .78 |
-| Binary Labels + With Stopwords +  Transfer Learning + Last Two Comments + Text  Only | exp5 | No Risk:  .80
-High Risk: .87 | No Risk:  .71
-High Risk: .92 | No Risk:  .72
-High Risk: .79 | .85 |
+|  | Experiment | Recall  | Precision | Accuracy |
+| --- | --- | --- | --- | --- |
+| Four Labels + No Stopwords + Only Last Comment  + Fine Tuning + Text Only  | exp1 | .46 | .38 | 0.46 |
+| Four Labels + No Stopwords + Last Two Comments  + Fine Tuning + Text Only  | exp2 | .53 | .37 | 0.53 |
+| Binary Labels + No Stopwords + Last Two comments + Fine Tuning + Text Only  | exp3 | .76 | .75 | .77 |
+| Binary Labels + No Stopwords + Last Two comments + Fine Tuning + Text Only + 2X tokens | exp4 | .77 | .80 | .78 |
+| Binary Labels + With Stopwords +  Transfer Learning + Last Two Comments + Text  Only | exp5 | .85 | .86 | .85 |
 
 ## Conclusion
 
@@ -140,7 +111,7 @@ High Risk: .79 | .85 |
 - It was also important to note that not only the user’s last comment on the channel but its past comment also helped improve the model.
 - The results were significantly better with `STOPWORDS`  with an accuracy of `85%` as and precision of `86%` and recall of `85%`
 
-![Confusion Matrix of the best performing Model on the test data](https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2022-08-25_at_12.14.47_AM.png)
+![Confusion Matrix of the best performing Model on the test data](https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/cf.png)
 
 Confusion Matrix of the best performing Model on the test data
 
