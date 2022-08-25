@@ -94,7 +94,10 @@ Before and After Transformation of Negative Count Feature
 - Squared the value and used it as the feature
 - Performed t-test and got the p-value of 0.012.
 
-![The difference in Distribution in the measure of  Aggregated Sadness Value between the two labels](https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/el.png)
+![The difference in Distribution in the measure of  Aggregated Sadness Value between the two labels]
+
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/el.png" width="40%">
+
 
 The difference in Distribution in the measure of  Aggregated Sadness Value between the two labels
 
