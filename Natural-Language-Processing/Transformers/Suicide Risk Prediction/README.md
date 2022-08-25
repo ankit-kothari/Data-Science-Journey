@@ -111,7 +111,7 @@ The difference in Distribution in the measure of  Aggregated Sadness Value betwe
 
 ## Conclusion
 
-- When all four were used, The results showed that the model was not able to distinguish between `low-risk`, `moderate-risk`, and `high`-`risk` labels, and most of the labels were classified as `high risk`
+- When all four labels were used, The results showed that the model was not able to distinguish between `low-risk`, `moderate-risk`, and `high`-`risk` labels, and most of the labels were classified as `high risk`
 - After that iteration, the problem was formulated as a binary classification problem where `low-risk`, `moderate-risk`, and `high`-`risk`  were combined to give a single label as `Severe Risk`  and `No Risk`
 - It was also important to note that not only the user’s last comment on the channel but its past comment also helped improve the model.
 - The results were significantly better with `STOPWORDS`  with an accuracy of `85%` as and precision of `86%` and recall of `85%`
