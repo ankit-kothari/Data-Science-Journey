@@ -64,11 +64,11 @@ Psychology, pages 24–33, Minneapolis, Minnesota, June 6, 2019.
 - Interestingly title length was marginally longer for people with no suicide risk. The mean is 9 and 7 words for no-risk and risk, respectively.
 - After analyzing, we ***filtered posts that were less than 30 words***
 
-![pl1.png](https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/pl1.png)
 
-<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/pl1.png" width="60%">
 
-![tl2.png](https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/tl2.png)
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/pl1.png" width="40%">
+
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/tl2.png" width="40%">
 
 ### Sentence Polarity (Positive, Negative)
 
