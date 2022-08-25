@@ -66,6 +66,8 @@ Psychology, pages 24–33, Minneapolis, Minnesota, June 6, 2019.
 
 ![pl1.png](https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/pl1.png)
 
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/pl1.png" width="60%">
+
 ![tl2.png](https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/tl2.png)
 
 ### Sentence Polarity (Positive, Negative)
@@ -102,7 +104,7 @@ The difference in Distribution in the measure of  Aggregated Sadness Value betwe
 | Four Labels + No Stopwords + Last Two Comments  + Fine Tuning + Text Only  | exp2 | .53 | .37 | 0.53 |
 | Binary Labels + No Stopwords + Last Two comments + Fine Tuning + Text Only  | exp3 | .76 | .75 | .77 |
 | Binary Labels + No Stopwords + Last Two comments + Fine Tuning + Text Only + 2X tokens | exp4 | .77 | .80 | .78 |
-| Binary Labels + With Stopwords +  Transfer Learning + Last Two Comments + Text  Only | exp5 | .85 | .86 | .85 |
+| Binary Labels + With Stopwords + Last Two Comments + Fine Tuning + Text  Only | exp5 | .85 | .86 | .85 |
 
 ## Conclusion
 
