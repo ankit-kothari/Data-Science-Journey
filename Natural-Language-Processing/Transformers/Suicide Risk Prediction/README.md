@@ -124,3 +124,4 @@ Confusion Matrix of the best performing Model on the test data
 
 - Experiments with Transfer Learning and trying tree-based methods
 - Add other numerical feature data
+- Get more data to better generalize the model 
