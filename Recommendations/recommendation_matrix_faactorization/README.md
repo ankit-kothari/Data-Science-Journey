@@ -2,7 +2,7 @@
 
 Ankit Kothari 
 
-## `Introduction`
+## `Introduction to Matrix Faactorization`
 
 The dataset contains `138493` users and `26744 movies`. Each user has rated at least 20 movies. This dataset has `~20 Million user-rating pairs`. **The problem that makes it challenging is that we are trying to train the model to be able to estimate the ratings for roughly 3703856792 user-rating combinations without the use of cloud computing or GPUs.**
 
