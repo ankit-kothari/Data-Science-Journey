@@ -26,9 +26,3 @@ destination = '/Volumes/GoogleDrive/Shared drives/MSML612 DeepLearningProject/da
 - The best model we trained was about 15 epochs due to the hardware constraints. Given that our qualitative dataset is relatively small, the results were vague but starting to form.
 - To generate image on a desired text, in the notebook CGAN_Predicition.ipynb change the variable ‘TEXT’ to the desired sentence and run the entire notebook to generate the predicted image at the end.
 
-### Special Mention: Lafite Code
-
-- We tried implementing the Lafite code which is open source. It can be found in the Lafite directory. The pickle can be processed using dataset_tool.py by giving its path to the source in the script. The data has been generated in the ldata folder.
-- Kindly go through the documentation of Lafite to setup the requirements.
-- To run the Lafite training script, you need to run $ python train.py --outdir=./training_runs --data=./ldata --test_data=./ldata_test. (We faced issues running this due to CUDA issues).
-- For Predicitons using Lafite, open the notebook Lafite/generate.ipynb and change the text to the required text. Run the notebook and the predictions should be loaded.
