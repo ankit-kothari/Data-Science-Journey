@@ -8,7 +8,7 @@
 
 N.B. This data is complied from the data available on the uscis website from 2009 to 2019, The data for 2019 is not complete so I have excluded it in most of my analysis
 
-## [Part 1: Loading and Optimization of H1B Data]([https://github.com/ankit-kothari/Data-Science-Journey/blob/master/Data%20Exploration%20Analysis%20and%20Visualization/H1B-Data-Analysis-master](https://github.com/ankit-kothari/Data-Science-Journey/blob/master/Data_Cleaning_Analysis_and_Visualization/H1B_Visa_Analysis/Loading_and_Optimization_of_H1B_data_file.ipynb)
+## [Part 1: Loading and Optimization of H1B Data](https://github.com/ankit-kothari/Data-Science-Journey/blob/master/Data_Cleaning_Analysis_and_Visualization/H1B_Visa_Analysis/Loading_and_Optimization_of_H1B_data_file.ipynb)
 - data profiling,downcasting, converting columns to the most optimized data type, droping unused columns among other techniques. 
 - In the context of this file, it doesn't matter but this can be applicable and hugely benifitial for larger datasets. 
 
