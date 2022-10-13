@@ -14,7 +14,7 @@ N.B. This data is complied from the data available on the uscis website from 200
 
 <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/newplot.png" height="60%" width="60%">
 
-## [Part 2: Data Profiling, Cleaning, Manipulations and loading into a SQL Database](https://github.com/ankit-kothari/Data-Science-Journey/blob/master/Data%20Exploration%20Analysis%20and%20Visualization/H1B-Data-Analysis-master/Data%20profiling_cleaning_manipulation_and_loading_into_a_SQL_database.ipynb)
+## [Part 2: Data Profiling, Cleaning, Manipulations and loading into a SQL Database](https://github.com/ankit-kothari/Data-Science-Journey/blob/master/Data_Cleaning_Analysis_and_Visualization/H1B_Visa_Analysis/Data%20profiling_cleaning_manipulation_and_loading_into_a_SQL_database.ipynb)
 - Checked for null values, unused columns, performed general agagregate analysis on the data. 
 - Added Longitude and Latitude colums using the google API for each of the states
 - Cleaned duplicate name convention for same employer using pandas vectorized functions and regex.
