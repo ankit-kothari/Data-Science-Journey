@@ -46,7 +46,7 @@ Comparison of Memory Usage before and after Datatype Downcasting
 
 ### Sparse Matrix
 
-- Since there will be a lot of cells with zero, a user will not rate all the ~28K movies. This type of matrix where there are a lot of 0's is called a dense matrix, and it is computationally expensive; on a regular Mac, this computation runs out of memory. Sparse-matrix was used to avoid running into this issue, which stores the (user_id,moveie_id) rating like a hash-map. It makes the computation go a lot faster.
+- Since there will be a lot of cells with zero, a user will not rate all the ~28K movies. This type of matrix where there are a lot of 0's is called a sparse matrix, and it is computationally expensive; on a regular Mac, this computation runs out of memory. Sparse-matrix was used to avoid running into this issue, which stores the (user_id,moveie_id) rating like a hash-map. It makes the computation go a lot faster.
 - Element Wise Multiplication
 - to vectorize the computation and instead of looping through the dataset using,
 - Embedding Matrix was created using the Element-wise between user and movie embeddings to avoid creating a dense matrix (NXM), which was one of the project's goals.
