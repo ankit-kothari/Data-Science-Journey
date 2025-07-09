@@ -4,7 +4,7 @@
 
 📧  Email: ankit256@gmail.com
 
-    Substack:https://kots256.substack.com/
+🔗  Substack: https://kots256.substack.com
 
 ## Data Science Must
 
