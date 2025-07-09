@@ -13,7 +13,7 @@
 - [**Docker**](https://medium.com/@ankitkothari_92911/docker-how-much-do-we-need-to-know-as-data-scientists-d5f695061ee8) :Creating a Dockerfile, images  running containers.
 - [**Gradient Descent and Stochastic Gradient Descent From Scratch**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Machine-Learning/GD%20and%20SGD%20from%20scratch):Exploring GD and SGD on Linear and Logistic Regression from scracth. 
 - [**Shapes in Deep Learning**](https://github.com/ankit-kothari/Data-Science-Journey/blob/master/Deep-Learning/Concepts-Deep%20Learning/Shapes%20in%20Deep%20Learning.ipynb):  Exploring the shapes of outputs of different layers like ANN, RNN,LSTM, CNN, BiLSTM, Maxpooling
-- [**Transformer Encoder from Scratch**](https://github.com/ankit-kothari/Data-Science-Journey/blob/master/Natural-Language-Processing/Transformers/transformer_anatomy.ipynb): Building Encoder blocks comprising of Multi-Head Attention, Feed-Forward blocks. 
+- [**Transformer Decoder from Scratch**](https://github.com/ankit-kothari/Data-Science-Journey/blob/master/Natural-Language-Processing/Transformers/transformers_from_scratch/decoder_only_from_scratch.ipynb): Building Decoder blocks comprising of Multi-Head Attention, Feed-Forward blocks. 
 - [**Basics of Spark and Map Reduce**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Data-Science-Must/Pyspark-and-MapReduce):Exploring Basiscs of Pyspark and how to manipulate data using Transformations and Actions
 
 Tools: Github, Docker, Pyspark, pandas, plotly
@@ -67,12 +67,20 @@ Tools: pandas, sqlite3, plotly, mapbox, data optimization, DASH, Heroku
 - [**TF2.0 and Keras approach to classification**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Natural-Language-Processing/TF2-Classification)
 - [**Multi Label classification using distilBERT**](https://github.com/ankit-kothari/Data-Science-Journey/blob/master/Natural-Language-Processing/Transformers/NLP_Part_7_Classification_with_pytorch_using_distilBERT.ipynb)
 - [**Experiments with Transformers and Hugging Face**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Natural-Language-Processing/Transformers)
+- [**LLM Projects**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/llm_projects)
+
+## Recommendation Systems
+- [**Movie Recs Using K-Means**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Recommendations/recommendation_kmeans)
+- [**Multi-Arm-Bandits**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Recommendations/Multi-Bandit-Arm)
+- [**Two-Tower-Model**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Recommendations/Two_Tower_Model)
+- [**Image2Product Recs**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Recommendations/image2product_recs)
+- [**Recommendations with AI Agents**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Recommendations/upsell_recommendation)
 
 **Deep Learning  Algorithms:** distilBERT,BERT, LSTM, BiLSTM, 1D-CNN, GRU, Word Embeddings, Sentence Encoders, TF-IDF, LDA, NMF
 
 **Text Analysis:** Text Cleaning using spacy, NER, POS, Text Classification, Chatbots, Topic Modeling
 
-**Tools:** Python, Pandas, TF2.0, keras, Pytorch, spacy, pyspark, Slack RTM API, seaborn, plotly
+**Tools:** Python, Pandas, TF2.0, keras, Pytorch, spacy, pyspark, Slack RTM API, seaborn, plotly, Langraph, Langchain, Agents, Transformers
 
 ## Machine Vison and Opencv
 
