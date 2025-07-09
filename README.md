@@ -4,6 +4,8 @@
 
 📧  Email: ankit256@gmail.com
 
+    Substack:https://kots256.substack.com/
+
 ## Data Science Must
 
 - [**Optimization of Large Datasets**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Big%20Data/optimizing-large-datasets):Process Pools, Threading, Downcasting, Memory optimization
