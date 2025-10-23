@@ -1,0 +1,107 @@
+Cricket is a sport loved by millions across the world. The crack of the bat, the roar of the crowd, and the tension of a final over make it an emotional experience. Training large models is a bit like playing a long Test match — it’s all about patience, resource management, and strategy.
+
+
+Large‑scale training requires careful memory management. Fully Sharded Data Parallel shards parameters, gradients, and optimizer states to reduce memory footprint.
+
+
+The bowler runs in, the batter watches closely, and each frame of action mirrors how a model processes sequences token by token.
+
+Cricket is a bat-and-ball game played between two teams of eleven players.
+
+The objective is to score more runs than the opposing team.
+
+The game is played on a circular or oval grass field, with a 22-yard pitch in the center.
+
+At each end of the pitch stands a set of three wooden stumps, known as a wicket.
+
+One team bats while the other team bowls and fields.
+
+The batting team tries to hit the ball and score runs by running between the two wickets.
+
+The fielding team tries to dismiss the batsmen and prevent them from scoring.
+
+A batsman (or batter) uses a flat-faced wooden bat to strike the ball.
+
+The bowler delivers the hard, leather-bound ball from one end of the pitch to the other.
+
+A batsman can be dismissed (out) in several ways, such as being "bowled" or "caught."
+
+"Bowled" is when the bowler hits the wicket with the ball, dislodging the bails.
+
+"Caught" is when a fielder catches the ball hit by the batsman before it touches the ground.
+
+A "run out" occurs if a batsman is attempting a run but a fielder breaks the wicket while the batsman is short of the crease.
+
+"LBW," or Leg Before Wicket, is a complex dismissal where the ball strikes the batsman's body instead of the bat and would have hit the stumps.
+
+A "stumping" happens when the wicket-keeper breaks the wicket while the batsman is out of their crease and not attempting a run.
+
+An "over" consists of six legal deliveries bowled by one bowler.
+
+After an over, a different bowler delivers the next over from the opposite end of the pitch.
+
+Runs are the basic scoring unit in cricket.
+
+Hitting the ball to the boundary rope along the ground automatically scores four runs.
+
+Hitting the ball over the boundary rope on the fly (without bouncing) scores six runs.
+
+A batsman who scores 100 runs in a single innings has made a "century."
+
+A batsman who is dismissed without scoring any runs is said to be out for a "duck."
+
+The wicket-keeper is a specialized fielder who stands behind the batsman's wicket.
+
+Fielders are strategically placed around the ground to stop runs or take catches.
+
+Common fielding positions include "slips," "gully," "cover," and "mid-wicket."
+
+There are three main international formats of cricket: Test, One Day International (ODI), and Twenty20 (T20).
+
+Test cricket is the longest format, played over five days with unlimited overs.
+
+In Test matches, players traditionally wear all-white clothing.
+
+One Day Internationals are limited to 50 overs per side.
+
+Twenty20 (T20) is the shortest format, where each team bats for only 20 overs.
+
+ODIs and T20s, known as "limited-overs cricket," feature colored clothing and a white ball.
+
+Fast bowlers use high speed, swing, and seam movement to try and dismiss the batsman.
+
+Spin bowlers deliver the ball at a slower pace, imparting spin to make it deviate off the pitch.
+
+A "no-ball" is an illegal delivery, which adds one run to the batting team's score and must be re-bowled.
+
+A "wide" is a delivery bowled too far from the batsman for them to hit, also resulting in an extra run.
+
+An "innings" refers to the period of time a team (or a single batsman) spends batting.
+
+A "maiden over" is an over in which the batting side scores zero runs.
+
+The "crease" is a white line near the wicket that defines the batsman's safe ground.
+
+Two umpires officiate the game on the field, making decisions and ensuring rules are followed.
+
+The Decision Review System (DRS) allows teams to challenge an on-field umpire's decision using technology.
+
+Cricket is governed internationally by the International Cricket Council (ICC).
+
+The "Ashes" is a famous Test cricket series played between England and Australia.
+
+The ICC Cricket World Cup is the premier international championship for One Day International cricket.
+
+The "drive" is a powerful batting shot played straight down the ground.
+
+A "cut" shot is played by the batsman square on the off-side to a short, wide delivery.
+
+A "yorker" is a specific type of delivery that the bowler aims at the batsman's feet.
+
+A "bouncer" is a short-pitched delivery that rises towards the batsman's chest or head.
+
+A "hat-trick" occurs when a bowler takes three wickets on three consecutive deliveries.
+
+The captain is responsible for making tactical decisions, such as setting the field and choosing the bowlers.
+
+Cricket is particularly popular in countries like India, England, Australia, Pakistan, South Africa, and the West Indies.
