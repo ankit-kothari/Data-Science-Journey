@@ -12,7 +12,7 @@ from torch.utils.data import Dataset, DataLoader, DistributedSampler
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from torch.distributed.fsdp import FullyShardedDataParallel as FSDP, ShardingStrategy, MixedPrecision
 from torch.distributed.fsdp import StateDictType, FullStateDictConfig
-
+import os
 os.environ['TOKENIZERS_PARALLELISM'] = 'false'
 os.environ['PYTORCH_ALLOC_CONF'] = 'expandable_segments:True'
 
@@ -51,37 +51,6 @@ def vram(msg):
     mx = torch.cuda.max_memory_allocated() / 1024**3
     print(f"[{dist.get_rank()}] VRAM {msg}: cur={cur:.2f} GB, max={mx:.2f} GB", flush=True)
 
-def print_model_stats(model, rank):
-    """Print detailed model statistics"""
-    if rank == 0:
-        total_params = sum(p.numel() for p in model.parameters())
-        trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
-        
-        print("\n" + "="*60)
-        print("MODEL STATISTICS")
-        print("="*60)
-        print(f"Total parameters: {total_params:,} ({total_params/1e9:.2f}B)")
-        print(f"Trainable parameters: {trainable_params:,} ({trainable_params/1e9:.2f}B)")
-        
-        # Calculate expected memory
-        model_mem_bf16 = trainable_params * 2 / 1e9  # BF16 weights
-        grad_mem_bf16 = trainable_params * 2 / 1e9   # BF16 gradients
-        optim_mem_fp32 = trainable_params * 4 * 2 / 1e9  # FP32 Adam states (momentum + variance)
-        
-        print(f"\nMEMORY BREAKDOWN (WITHOUT FSDP):")
-        print(f"  Model weights (BF16): {model_mem_bf16:.2f} GB")
-        print(f"  Gradients (BF16): {grad_mem_bf16:.2f} GB")
-        print(f"  Optimizer states (FP32): {optim_mem_fp32:.2f} GB")
-        print(f"  Total (before activations): {model_mem_bf16 + grad_mem_bf16 + optim_mem_fp32:.2f} GB")
-        
-        print(f"\nEXPECTED PER-GPU WITH ZeRO-2 (4 GPUs):")
-        print(f"  Model weights (NOT sharded): {model_mem_bf16:.2f} GB")
-        print(f"  Gradients (sharded): {grad_mem_bf16/4:.2f} GB")
-        print(f"  Optimizer states (sharded): {optim_mem_fp32/4:.2f} GB")
-        print(f"  Subtotal: {model_mem_bf16 + grad_mem_bf16/4 + optim_mem_fp32/4:.2f} GB")
-        print("  + Activations: ~2-6 GB (depends on batch size)")
-        print("="*60 + "\n")
-
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--model', type=str, default='Qwen/Qwen2-4B')
@@ -91,38 +60,17 @@ def main():
     ap.add_argument('--lr', type=float, default=2e-4)
     ap.add_argument('--steps', type=int, default=20)
     args = ap.parse_args()
-    
+
     rank, world, local_rank = setup_dist()
-    
-    if rank == 0:
-        print(f"\n{'='*60}")
-        print(f"TRAINING CONFIGURATION")
-        print(f"{'='*60}")
-        print(f"Model: {args.model}")
-        print(f"Global batch size: {args.global_bs}")
-        print(f"Micro batch size per GPU: {math.ceil(args.global_bs/world)}")
-        print(f"Sequence length: {args.seq_len}")
-        print(f"World size: {world}")
-        print(f"{'='*60}\n")
-    
+
     tokenizer = AutoTokenizer.from_pretrained(args.model, use_fast=True)
     tokenizer.pad_token = tokenizer.eos_token
-    
-    # Load base model first to get statistics
+
     base = AutoModelForCausalLM.from_pretrained(args.model)
-    
-    # Print stats before FSDP wrapping
-    print_model_stats(base, rank)
-    
-    vram('after loading base model (before FSDP)')
-    
+
     # Mixed precision helps a lot with activation/grad memory
-    mp = MixedPrecision(
-        param_dtype=torch.bfloat16, 
-        reduce_dtype=torch.bfloat16, 
-        buffer_dtype=torch.bfloat16
-    )
-    
+    mp = MixedPrecision(param_dtype=torch.bfloat16, reduce_dtype=torch.bfloat16, buffer_dtype=torch.bfloat16)
+
     model = FSDP(
         base.cuda(),
         sharding_strategy=ShardingStrategy.SHARD_GRAD_OP,  # ≈ ZeRO‑2
@@ -130,59 +78,29 @@ def main():
         mixed_precision=mp,
         device_id=local_rank,
     )
-    
+
     opt = torch.optim.AdamW(model.parameters(), lr=args.lr)
-    
-    vram('after model+optimizer construction (ZeRO‑2)')
-    
+
     ds = LineDataset(args.data, tokenizer, args.seq_len)
     sampler = DistributedSampler(ds, num_replicas=world, rank=rank, shuffle=True)
-    dl = DataLoader(
-        ds, 
-        batch_size=math.ceil(args.global_bs/world), 
-        sampler=sampler,
-        num_workers=2, 
-        pin_memory=True, 
-        drop_last=True
-    )
-    
+    dl = DataLoader(ds, batch_size=math.ceil(args.global_bs/world), sampler=sampler,
+                    num_workers=2, pin_memory=True, drop_last=True)
+
+    vram('after model+optimizer construction (ZeRO‑2)')
+
     model.train()
-    
     for step, (x, y) in enumerate(dl):
-        if step >= args.steps: 
-            break
-            
+        if step >= args.steps: break
         x = x.cuda(non_blocking=True)
         y = y.cuda(non_blocking=True)
-        
-        if step == 0:
-            vram('before first forward pass')
-        
         out = model(x, labels=y)
         loss = out.loss
-        
-        if step == 0:
-            vram('after first forward pass (peak activations)')
-        
         loss.backward()
-        
-        if step == 0:
-            vram('after first backward pass (peak gradients)')
-        
-        opt.step()
-        opt.zero_grad(set_to_none=True)
-        
-        if step == 0:
-            vram('after first optimizer step')
-        
+        opt.step(); opt.zero_grad(set_to_none=True)
         if step % 5 == 0 and rank == 0:
-            print({"step": step, "loss": float(loss.detach())}, flush=True)
-    
+            print({"step": step, "loss": float(loss)}, flush=True)
+
     vram('end of run (ZeRO‑2)')
-    
-    # Cleanup
-    if dist.is_initialized():
-        dist.destroy_process_group()
 
 if __name__ == '__main__':
     main()
