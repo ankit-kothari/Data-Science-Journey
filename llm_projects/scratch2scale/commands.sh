@@ -15,6 +15,12 @@
 
 
 
-#torchrun --standalone --nnodes 1 --nproc_per_node 4 02_FSDP_ZeRO2_Strategy.py \
-  --model Qwen/Qwen3-4B \
-  --data toy_corpus_large.txt --seq_len 2048 --global_bs 4 --lr 2e-4
+#torchrun --standalone --nnodes 1 --nproc_per_node 4 02_FSDP_ZeRO2_Strategy.py   --model Qwen/Qwen3-4B   --data toy_corpus_large.txt   --seq_len 2048   --global_bs 4   --lr 2e-4   --steps 5
+
+
+#torchrun --standalone --nnodes 1 --nproc_per_node 4 03_FSDP_ZeRO3_Strategy.py   --model Qwen/Qwen3-4B   --data toy_corpus_large.txt   --seq_len 2048   --global_bs 4   --lr 2e-4   --steps 5
+
+
+#git config --global user.email "ankit256@gmail.com"
+#git config --global user.name ankit-kothari
+
