@@ -1,97 +1,70 @@
-## Data Science Journey
+# Ankit Kothari — Personalization, Recommendations & Applied AI
 
-🔗  LinkedIn: https://www.linkedin.com/in/ankit-kothari-510a9623
+Hands-on projects in recommendation systems, LLM engineering, and applied machine learning — from matrix factorization on 20M ratings to distributed transformer training with FSDP.
 
-📧  Email: ankit256@gmail.com
+[LinkedIn](https://www.linkedin.com/in/ankit-kothari-510a9623) | [Substack](https://kots256.substack.com) | ankit256@gmail.com
 
-🔗  Substack: https://kots256.substack.com
+---
 
-## Data Science Must
+## Recommendation & Personalization Systems
 
-- [**Optimization of Large Datasets**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Big%20Data/optimizing-large-datasets):Process Pools, Threading, Downcasting, Memory optimization
-- [**Github**](https://medium.com/@ankitkothari_92911/git-crash-course-that-will-make-your-life-easy-97273565c95e):Squashing, Rebasing, Merging, fetch, remote,
-- [**Docker**](https://medium.com/@ankitkothari_92911/docker-how-much-do-we-need-to-know-as-data-scientists-d5f695061ee8) :Creating a Dockerfile, images  running containers.
-- [**Gradient Descent and Stochastic Gradient Descent From Scratch**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Machine-Learning/GD%20and%20SGD%20from%20scratch):Exploring GD and SGD on Linear and Logistic Regression from scracth. 
-- [**Shapes in Deep Learning**](https://github.com/ankit-kothari/Data-Science-Journey/blob/master/Deep-Learning/Concepts-Deep%20Learning/Shapes%20in%20Deep%20Learning.ipynb):  Exploring the shapes of outputs of different layers like ANN, RNN,LSTM, CNN, BiLSTM, Maxpooling
-- [**Transformer Decoder from Scratch**](https://github.com/ankit-kothari/Data-Science-Journey/blob/master/Natural-Language-Processing/Transformers/transformers_from_scratch/decoder_only_from_scratch.ipynb): Building Decoder blocks comprising of Multi-Head Attention, Feed-Forward blocks. 
-- [**Basics of Spark and Map Reduce**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Data-Science-Must/Pyspark-and-MapReduce):Exploring Basiscs of Pyspark and how to manipulate data using Transformations and Actions
+| Project | What it does | Key detail |
+|---|---|---|
+| [**Two-Tower Retrieval Model**](Recommendations/Two_Tower_Model) | Full candidate generation + ranking pipeline with multi-task learning | Separate candidate gen and ranker notebooks; multi-task objective balances engagement and conversion |
+| [**Matrix Factorization from Scratch**](Recommendations/recommendation_matrix_factorization) | Collaborative filtering on 20M MovieLens ratings using SGD, sparse matrices, no GPU | Reduced 3.4B parameters to 2.4M (0.07%) via latent factor decomposition; models user and item bias explicitly |
+| [**Contextual Bandits for Explore/Exploit**](Recommendations/Multi-Bandit-Arm) | Online learning on Yahoo! Front Page click logs — balancing exploration vs exploitation in real time | Real-world logged bandit data with unbiased offline evaluation |
+| [**Image-to-Product Recommendations**](Recommendations/image2product_recs) | Visual similarity search: given a product image, retrieve visually similar items from catalog | Multimodal embeddings bridging vision and product metadata |
+| [**Upsell Recommendations with AI Agents**](Recommendations/upsell_recommendation) | Agentic recommendation system using LangGraph — autonomous multi-step reasoning for cross-sell/upsell | LLM agent with tool use for personalized product recommendations |
 
-Tools: Github, Docker, Pyspark, pandas, plotly
+## LLM & Transformer Engineering
 
-## [**Data Exploration, Analysis and Visualization**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Data_Cleaning_Analysis_and_Visualization)
+| Project | What it does | Key detail |
+|---|---|---|
+| [**Transformer Decoder from Scratch**](Natural-Language-Processing/Transformers/transformers_from_scratch/decoder_only_from_scratch.ipynb) | Full decoder-only transformer: masked multi-head attention, feed-forward blocks, positional encoding | Built block by block — no `nn.Transformer`, every shape traced |
+| [**Transformer Encoder from Scratch**](Natural-Language-Processing/Transformers/transformers_from_scratch/encoder_only_from_scratch.ipynb) | Encoder-only transformer with self-attention and layer normalization | Complements the decoder — full understanding of both architectures |
+| [**Distributed Training: DDP to FSDP ZeRO-2/3**](llm_projects/scratch2scale) | Progressive scaling: single GPU baseline (OOM) → DDP → FSDP ZeRO-2 → ZeRO-3 with advanced sharding | 5 scripts showing exactly what breaks at each scale and how to fix it |
+| [**Text-to-Image with CGAN + BERT Embeddings**](Natural-Language-Processing/T2I-with-quantitative-embeddings) | Conditional GAN conditioned on BERT text embeddings for text-to-image generation | Custom CGAN architecture with quantitative embedding conditioning |
+| [**Research Paper to Podcast**](llm_projects/research_paper2podcast) | LLM pipeline that converts academic papers into podcast-style audio | End-to-end: PDF parsing → summarization → conversational script → audio |
+| [**LLM Distillation**](Natural-Language-Processing/random_experiments/distillation_large_language_model.ipynb) | Knowledge distillation from large language models to smaller student models | Practical compression techniques for production deployment |
 
-### 1. [**H1B Data Analysis**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Data_Cleaning_Analysis_and_Visualization/H1B_Visa_Analysis) 
-**The raw data has been downloaded from the USCIS Website which has an individual csv file for each year. It has data regaridng Employers, Initial Approvals, Continuing Approvals, Initial Denials, Continuing Denials, and demographic data. The goal of this analysis is to look at different trends around H1B visas touching Employers and States**
+## Experimentation & Measurement
 
-  - [**Visualizations using Plotly**](https://colab.research.google.com/drive/1BREsuISGVMJiQrdBH03KlO3OpMyzqqbN?usp=sharing)
-  - [**My Blog Article**](https://www.linkedin.com/pulse/some-interesting-h1b-trends-insights-ankit-kothari)
-  - [**H1B Data Dashboard using Dash and Plotly**](https://dash-app-h1bvisa.herokuapp.com/) 
-  
-### 2. [**INR-USD Trend Analysis 2000-2020**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Data%20Cleaning%20Analysis%20and%20Visualization/Currency%20Trend%20Analysis%20(INR%20vs%20USD)) 
-  **This project visualizes how INR changed in the last 20 years under three different Prime Minister of India**
-  
-### 3. [**Identifying customer segments that would increase sales the most and target them with ads in social media.**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Data%20Cleaning%20Analysis%20and%20Visualization/Identify%20Customers%20for%20Promotion)
+| Project | What it does | Key detail |
+|---|---|---|
+| [**A/B Testing Framework**](Probablity-and-Statistics/AB-Testing) | End-to-end experiment design: power analysis, sample size, hypothesis testing, p-value interpretation | Includes [Cookie Cats case study](Probablity-and-Statistics/AB-Testing/ab-testing-cookie-cat-dataset.ipynb) — real mobile game retention experiment |
+| [**Evaluation Metrics from Scratch**](Natural-Language-Processing/helper_functions/metric_evaluation.ipynb) | Classification and ranking metrics implemented from numpy | Precision, recall, F1, AUC — understanding the math, not just the API |
+| [**Credit Risk Modeling**](Machine-Learning/Credit-Risk-Analysis-master) | Predict loan default: Logistic Regression vs XGBoost vs ANN on LendingClub data | Fintech domain — hyperparameter tuning, class imbalance, feature engineering at scale |
 
-### 4. [**Identify Undervalued apps to Improve Revenue**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Data%20Cleaning%20Analysis%20and%20Visualization/Identify%20Undervalued%20Apps%20on%20Google%20Store)
+## Deep Learning & NLP
 
-Tools: pandas, sqlite3, plotly, mapbox, data optimization, DASH, Heroku
+| Project | What it does | Key detail |
+|---|---|---|
+| [**Shapes in Deep Learning**](Deep-Learning/Concepts-Deep%20Learning/Shapes%20in%20Deep%20Learning.ipynb) | Tensor shape reference for ANN, RNN, LSTM, CNN, BiLSTM, MaxPooling layers | The mental model that prevents shape bugs |
+| [**Text Classification Benchmark**](Natural-Language-Processing/Transformers/classification_tasks) | Multi-class and multi-label classification across architectures | [distilBERT](Natural-Language-Processing/Transformers/classification_tasks), [Pytorch](Deep-Learning/Text%20Classification), [Sentiment](Natural-Language-Processing/Transformers/classification_tasks) |
+| [**Chatbots: 4 Architectures Compared**](Natural-Language-Processing/chatbots) | TF-IDF vs Word Embeddings vs Sentence Embeddings vs TF-Hub Encoders | Same task, four approaches — understanding which representation wins and why |
+| [**Topic Modeling**](Natural-Language-Processing/Topic-Modeling) | LDA and NMF for unsupervised topic extraction | Document clustering and theme discovery |
+| [**Named Entity Recognition**](Natural-Language-Processing/Named%20Entity%20Recognition) | NER pipeline with spaCy | Entity extraction for structured information retrieval |
+| [**Style Transfer**](Machine-Vison/Style%20Transfer) | Neural style transfer using VGG19 in PyTorch | Content + style loss optimization |
+| [**Gradient Descent from Scratch**](Machine-Learning/GD%20and%20SGD%20from%20scratch) | GD and SGD on linear and logistic regression — no sklearn | Understanding optimization at the gradient level |
 
-## Probablity and Statistics
+## Data Engineering & Scale
 
-- [**All about Normal Distribution with Scipy and Plotly**](https://www.notion.so/ankitkothari/Normal-distribution-withy-scipy-and-plotly-4092ad177ce14be280efddb1a64c954f)
-- [**How to plan an AB Test?**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Probablity-and-Statistics/AB-Testing)
-- [**Analyze an A/B test from the popular mobile puzzle game Cookie Cats**](https://github.com/ankit-kothari/Data-Science-Journey/blob/master/Probablity-and-Statistics/AB-Testing/ab-testing-cookie-cat-dataset.ipynb)
+| Project | What it does | Key detail |
+|---|---|---|
+| [**Large Dataset Optimization**](Big%20Data/optimizing-large-datasets) | Process pools, threading, downcasting, memory optimization | Practical techniques for working with data that doesn't fit in memory |
+| [**Spotify 1M Songs with Dask**](Big%20Data/Spotify%201M%20Songs%20Analysis%20with%20Dask) | Distributed data analysis on 1M tracks using Dask | Out-of-core computation on a single machine |
+| [**PySpark & MapReduce**](Big%20Data/Pyspark-and-MapReduce) | Spark fundamentals: transformations, actions, distributed data manipulation | MapReduce mental model for distributed processing |
+| [**Optimization Problems**](optimization_projects) | Job scheduling, construction planning, power generation, route optimization | Linear programming and constraint satisfaction |
 
-**Theory:** Hypothesis Testing, AB Testing, Data Distributions, Parametric and Non-Parametric Test
+## Data Analysis & Visualization
 
-**Tools:** Python, Pandas, scipy, plotly, statsmodel
+| Project | What it does |
+|---|---|
+| [**H1B Visa Trend Analysis**](Data_Cleaning_Analysis_and_Visualization/H1B_Visa_Analysis) | Employer and state trends from USCIS data — [interactive Plotly visualizations](https://colab.research.google.com/drive/1BREsuISGVMJiQrdBH03KlO3OpMyzqqbN?usp=sharing) |
+| [**Customer Segmentation for Ad Targeting**](Data_Cleaning_Analysis_and_Visualization/Identify%20Customers%20for%20Promotion) | Identifying high-value customer segments for social media ad campaigns |
+| [**App Store Revenue Optimization**](Data_Cleaning_Analysis_and_Visualization/Identify%20Undervalued%20Apps%20on%20Google%20Store) | Finding undervalued apps to improve revenue |
+| [**Bike Rental Prediction**](Machine-Learning/predicting_bike_rentals) | Decision trees vs Random Forest for hourly demand prediction |
 
-## Machine Learning
+---
 
-- [**Bike Rental Prediction**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Machine-Learning/predicting_bike_rentals): Comparing Decesion Treed Models and Enssemble Methods using Random Forest to predict the bike rentals at a given hour of the day
-- [**Credit Risk Analysis:**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Machine-Learning/Credit-Risk-Analysis-master)  Comparing and exploring Hyperparameters to tune Logistic Regression, XGBoost and Artificial Nueral Network  to predict whether a lender will pay their loan back. Uses publically available data from [LendingClub.com](http://lendingclub.com/)
-
-**ML Algorithms:** Linear Regression, Logistic Regression, Decesion Tree Model, Random Forest, XGBoost, ANN, Ensemble Models
-
-**Feature Extractions:** Data Cleaning, Normalizing/Scaling of  the data, Binning, Sampling, Correlation Matrix, Hyperparameter Tuning
-
-**Tools:** Python, Pandas, sklearn, keras, 
-
-## Natural Language Processing
-
-- [**Data Cleaning, Extraction and Topic Modeling**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Natural-Language-Processing/Data-Cleaning-Extraction)
-- [**Spacy Playground**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Natural-Language-Processing/Spacy)
-- [**Topic Modeling**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Natural-Language-Processing/Topic-Modeling)
-- [**Chatbots**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Natural-Language-Processing/chatbots) Using 4 different archtitectures, TF-IDF, Word Embeddings, Sentence Embeddings, and TF-hub sentence Encoders, compare the efficiency of all these models. 
-- [**Pytorch approach to classification**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Natural-Language-Processing/Pytorch-Classification)
-- [**TF2.0 and Keras approach to classification**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Natural-Language-Processing/TF2-Classification)
-- [**Multi Label classification using distilBERT**](https://github.com/ankit-kothari/Data-Science-Journey/blob/master/Natural-Language-Processing/Transformers/NLP_Part_7_Classification_with_pytorch_using_distilBERT.ipynb)
-- [**Experiments with Transformers and Hugging Face**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Natural-Language-Processing/Transformers)
-- [**LLM Projects**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/llm_projects)
-
-## Recommendation Systems
-- [**Movie Recs Using K-Means**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Recommendations/recommendation_kmeans)
-- [**Multi-Arm-Bandits**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Recommendations/Multi-Bandit-Arm)
-- [**Two-Tower-Model**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Recommendations/Two_Tower_Model)
-- [**Image2Product Recs**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Recommendations/image2product_recs)
-- [**Recommendations with AI Agents**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Recommendations/upsell_recommendation)
-
-**Deep Learning  Algorithms:** distilBERT,BERT, LSTM, BiLSTM, 1D-CNN, GRU, Word Embeddings, Sentence Encoders, TF-IDF, LDA, NMF
-
-**Text Analysis:** Text Cleaning using spacy, NER, POS, Text Classification, Chatbots, Topic Modeling
-
-**Tools:** Python, Pandas, TF2.0, keras, Pytorch, spacy, pyspark, Slack RTM API, seaborn, plotly, Langraph, Langchain, Agents, Transformers
-
-## Machine Vison and Opencv
-
-- [**Style Transfer using Pytorch**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Machine-Vison/Style%20Transfer)
-- [**Basics of opencv**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Machine-Vison/Basics%20of%20OpenCV)
-- [**Identifying digits and predicting digits using opencv and keras**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Machine-Vison/Handwrittent%20Digit%20Recognition%20using%20OpenCV%20and%20Keras)
-- [**How to scan a document**](https://github.com/ankit-kothari/Data-Science-Journey/tree/master/Machine-Vison/Scan-with-OpenCV)
-
-**Deep Learning  Algorithms:** CNN, OpenCV, Keras
-
-**Image Analysis: Blurring, Thresholding, Edge Detection, Morphological transformations, Contour detection, Affine Transformation, Transfer Learning, VGG19**
-
-**Tools:** Python, Pandas, TF2.0, keras, Pytorch, spacy, pyspark, OpenCV
-
+**Tools:** Python, PyTorch, TensorFlow, NumPy, pandas, scikit-learn, PySpark, Dask, LangGraph, LangChain, Hugging Face Transformers, spaCy, OpenCV, Plotly, Docker, FSDP
