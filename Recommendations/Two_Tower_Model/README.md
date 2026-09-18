@@ -19,10 +19,10 @@ User/Item Features → Two-Tower Retrieval → Candidate Set → Ranking Model �
 
 | Notebook | Stage | What it does |
 |---|---|---|
-| `candidate_generator_submission.ipynb` | **Retrieval** | Two-tower model (user tower + item tower) trained with in-batch negatives. Outputs user and item embeddings for ANN lookup. Uses Dask for large-scale data processing. |
-| `rankers_hmdata.ipynb` | **Ranking** | Single-objective ranking model using feature crosses and deep layers. Scores candidate items for a given user. |
-| `rankers_hmdata_multi_task_learning.ipynb` | **Ranking (multi-task)** | Joint optimization of click prediction and purchase prediction. Balances engagement vs conversion with task-specific heads sharing a common backbone. |
-| `user_representation.ipynb` | **Serving** | FAISS approximate nearest neighbor index for real-time retrieval. Benchmarks FAISS vs brute-force sklearn on embedding lookup latency and recall. |
+| `01_candidate_generation_two_tower.ipynb` | **Retrieval** | Two-tower model (user tower + item tower) trained with in-batch negatives. Outputs user and item embeddings for ANN lookup. Uses Dask for large-scale data processing. |
+| `02_ranking_model.ipynb` | **Ranking** | Single-objective ranking model using feature crosses and deep layers. Scores candidate items for a given user. |
+| `03_ranking_multi_task_learning.ipynb` | **Ranking (multi-task)** | Joint optimization of click prediction and purchase prediction. Balances engagement vs conversion with task-specific heads sharing a common backbone. |
+| `04_faiss_ann_serving.ipynb` | **Serving** | FAISS approximate nearest neighbor index for real-time retrieval. Benchmarks FAISS vs brute-force sklearn on embedding lookup latency and recall. |
 
 ## Key Techniques
 
