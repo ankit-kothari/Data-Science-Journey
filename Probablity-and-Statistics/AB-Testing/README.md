@@ -1,694 +1,670 @@
-# How to plan an AB Test?
+# A/B Testing for Recommendations & Personalization
 
-This is a theoretical article covering the different aspects of AB testing, for a complete working example, please refer to the following article.
+End-to-end reference for designing, running, and analyzing experiments on recommendation systems and personalization features.
 
-[Analyze an A/B test from the popular mobile puzzle game Cookie Cats]. 
+For a worked example, see the [Cookie Cats retention case study](ab-testing-cookie-cat-dataset.ipynb).
 
-https://colab.research.google.com/drive/1hvqRno8u73yeU8pW_gDZ_cD5SMXU5u0v?usp=sharing
+---
 
-## Experiment Design
+**Contents:**
+[1. Experiment Design](#1-experiment-design) · [2. Hypothesis Formulation](#2-hypothesis-formulation) · [3. Significance & Power](#3-significance-and-power) · [4. Metric Selection](#4-metric-selection) · [5. Effect Size](#5-effect-size) · [6. Sample Size](#6-sample-size-calculation) · [7. Distributions](#7-data-distributions) · [8. Parametric Tests](#8-parametric-tests) · [9. Non-Parametric Tests](#9-non-parametric-tests) · [10. Drawing Conclusions](#10-drawing-conclusions) · [11. Pros & Cons](#11-pros-and-cons) · [12. Resources](#12-resources)
 
-### What is an A/B/C../N testing experiment?
+---
 
-In an A/B/C../N testing experiment, we are looking to see whether one or more **explanatory variables**, e.g., change in the color of the button, change in the fonts on the webpage, affect the **response variable**. That is the metrics we selected to measure like conversion rate, retention rate, or people buying more stuff.
+## 1. Experiment Design
 
-The people are assigned into at least two different groups, using proper **random sampling** techniques like cluster sampling, stratified sampling depending upon the use case. That way, the groups aren’t biased.
+An A/B test measures whether a change (new ranking model, different carousel layout, personalized vs generic homepage) causes a meaningful shift in a target metric (CTR, conversion, retention, revenue per user).
 
-One group acts as the **control group**, which is the group that does nothing, receives nothing, or isn’t changed the way they are working. The other group is called the **treatment group** (also called the experimental group), a group that does something, receives something, or gets a new feature that we are trying to launch. The classic example of this is in medical studies, where the treatment group receives some new drug, and the control group receives a placebo, or sugar pill.
+| Group | Role | Rec-sys example |
+| --- | --- | --- |
+| **Control** | Existing experience | Collaborative-filtering ranker |
+| **Treatment** | New variant | Two-tower retrieval + neural ranker |
 
-Other methods can be used to make the experiment more reliable. For example, the trial could be **blind or double-blind**.
+Users are assigned via **random sampling** — simple, stratified (by region/platform), or cluster (by household) depending on the surface.
 
-- A **blind experiment** is when the participants don’t know whether they’re in the control group or the treatment group.
-- A **double-blind experiment** is when neither the participants nor the people administering the examination know if the participant belongs to a control or a treatment group.
-- **Blocking** The separation of participants into related groups is called blocking. For example, we can block on gender by randomly selecting an equal number of men and women, instead of a truly random sample in which the number of men and women isn’t controlled. For example, If they then treat half of the men and half of the women with the drug, and give a placebo to the other half of the men and the other half of the women, the blocking on gender helps them to see if the drug affects men and women differently.
-- **Matched pairs** A matched pairs experiment is a more specific kind of blocking. The participants in the **treatment group and the control group** are matched based on similar characteristics. For example, to see how gender and age change the effect of the blood pressure drug. We could match the ages and genders in the control group with the ages and genders in the **treatment group.** For example, they could put one 18-year-old man in the treatment group and put her matched pair (another 18-year-old man) in the control group. A matched pairs experiment design is an improvement over a completely randomized design. Participants are still randomly assigned to the treatment and control groups, but potentially confounding variables, like age and gender, are controlled and accounted for in the experiment.
+### Reliability techniques
 
-### Null Hypothesis and Alternate hypothesis: **What question do we want to answer?**
+| Technique | What it does | Rec-sys example |
+| --- | --- | --- |
+| **Blind** | Users don't know their group | All rec experiments — users never see group labels |
+| **Double-blind** | Analysts also don't know during collection | Prevents bias in manual quality audits of recommendations |
+| **Blocking** | Split on a known confounder before randomization | Block on platform (iOS/Android) — ranking model may perform differently per device |
+| **Matched pairs** | Pair treatment/control users on shared traits | Match on tenure + purchase frequency, so heavy buyers are equally represented in both groups |
 
-- **H0 (null hypothesis)**: status quo, we don't expect any change.  The null hypothesis usually states that there is **no difference** between treatment and control groups. (To put this another way, we’re saying our treatment outcome will be statistically similar to our control outcome )
-- **HA (alternative hypothesis):** The alternative hypothesis states that **there is a difference** between treatment and control groups. (In other words, the treatment outcome will be statistically different to the control outcome)
+---
 
-  
-    <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/FB43C87D-FC14-4F57-B2EB-149DEF1B5233.jpeg" width="40%">
+## 2. Hypothesis Formulation
 
-    Types of Hypotheis Test  
+| | Definition | Rec-sys example |
+| --- | --- | --- |
+| **H₀** | No difference between groups | The new two-tower ranker produces the same CTR as collaborative filtering |
+| **H₁** | There is a difference | The new ranker changes CTR (up or down) |
 
-**Few examples,**
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/FB43C87D-FC14-4F57-B2EB-149DEF1B5233.jpeg" width="40%">
 
-**Case 1 (two-tailed test)**
+### One-tailed vs two-tailed
 
-- **H0:**  **Data Science pays as much as software engineer**  ;
-- **HA:** **Data Science does not pay as much as a software engineer**.
-- This will be two-tailed meaning the data science might be getting more or less than software engineers. The **two-tailed test** is less stringent than the 1-tailed test
-
-**Case 2 (upper-tail test)**
-
-- **H0:**  **Data Science pays less than equal to software engineer**  ;
-- **HA:** **Data Science  pays greater software engineer**.
-- This is called **upper-tail test(one-tail test)**, we are checking only if data Science pays higher
-
-**Case 3  (lower-tail test)**
-
-- **H0:**  **Data Science pays greater than equal to software engineer**  ;
-- **HA:** **Data Science  pays less software engineer**.
-- This is called the **lower-tail test(one-tail test)**, we are checking only if data Science pays lower.
-- **H0 (null hypothesis)**: status quo, we don't expect any change.  The null hypothesis usually states that there is **no difference** between treatment and control groups. (To put this another way, we’re saying our treatment outcome will be statistically similar to our control outcome )
-- **HA (alternative hypothesis):** The alternative hypothesis states that **there is a difference** between treatment and control groups. (In other words, the treatment outcome will be statistically different to the control outcome)
-
-**Few examples,**
-
-**Case 1 (two-tailed test)**
-
-- **H0:**  **Data Science pays as much as software engineer**  ;
-- **HA:** **Data Science does not pay as much as a software engineer**.
-- This will be two-tailed meaning the data science might be getting more or less than software engineers. The **two-tailed test** is less stringent than the 1-tailed test
-
-**Case 2 (upper-tail test)**
-
-- **H0:**  **Data Science pays less than equal to software engineer**  ;
-- **HA:** **Data Science  pays greater software engineer**.
-- This is called **upper-tail test(one-tail test)**, we are checking only if data Science pays higher
-
-**Case 3  (lower-tail test)**
-
-- **H0:**  **Data Science pays greater than equal to software engineer**  ;
-- **HA:** **Data Science  pays less software engineer**.
-- This is called the **lower-tail test(one-tail test)**, we are checking only if data Science pays lower.
-
-**Hoes it look like with python and scipy?**
+| Test type | H₀ | H₁ | When to use |
+| --- | --- | --- | --- |
+| **Two-tailed** | New ranker CTR = old ranker CTR | New ranker CTR ≠ old ranker CTR | Default — you want to detect harm too |
+| **Upper-tail** | New ranker CTR ≤ old ranker CTR | New ranker CTR > old ranker CTR | Only care about improvement (rare in practice) |
+| **Lower-tail** | New ranker CTR ≥ old ranker CTR | New ranker CTR < old ranker CTR | Guardrail check — is the new model degrading? |
 
 ```python
-**#How does it work in python and scipy**
 from scipy.stats import mannwhitneyu
-stat, p_value = mannwhitneyu(a_dist, b_dist, alternative="greater")  #upper tail test
-stat, p_value = mannwhitneyu(a_dist, b_dist, alternative="two-sided")  #two tail test
-stat, p_value = mannwhitneyu(a_dist, b_dist, alternative="less")     #lower tail test
+
+# Example: comparing revenue-per-session between control and treatment
+stat, p = mannwhitneyu(control_revenue, treatment_revenue, alternative="two-sided")   # two-tailed
+stat, p = mannwhitneyu(control_revenue, treatment_revenue, alternative="greater")     # upper-tail
+stat, p = mannwhitneyu(control_revenue, treatment_revenue, alternative="less")        # lower-tail
 ```
 
-### **Significance Level** What is the acceptable risk of accepting the alternative hypothesis?
+---
 
-- **Significance (𝛂)** = the probability of rejecting `H0` when `H0` is true, common values are `0.1, 0.05 and 0.1`, depending on the risk of making such mistake, the higher the risk, the lower your `𝛂` should be. These correspond to **confidence intervals** of `90%, 95%, and 99%` respectively.
-- **Power (1-𝛃)**
-    - The probability of **correctly rejecting  H0 when H0 is false**. It can also be interpreted as the likelihood of observing the effect when there is said effect to be observed. eg: the new recipe with choclate  is, in fact, more popular than the original recipe with vanila.
-    - The  common values of **(1-𝛃)**  are `0.8, 0.85, 0.9 and 0.95, 0.99`. This depends on how costly it is to miss this change when there is an actual change, the higher the cost, the lower your `𝜷` should be and hence higher target **statistical power**.
-    - A low power will mean our results are less reliable and we may be making false conclusions about our alternative hypothesis. Ideally we want power to be above `0.75–0.8` for a good probability of detecting an effect accurately.
-    - Power is analogous to significance, This will enable us to determine sample size needed so we have enough statistical power and significance.
+## 3. Significance and Power
 
-Higher the power better off we are in accepting the alternative hypothesis 
+These control your error rates and determine how many users you need.
+
+### Significance level (α) — Type I error rate
+
+Probability of rejecting H₀ when H₀ is true (false positive: you ship a model that isn't actually better).
+
+| α | Confidence | When to use |
+| --- | --- | --- |
+| 0.10 | 90% | Low-risk: carousel reordering, copy change |
+| 0.05 | 95% | Standard: new ranking model, recommendation algorithm |
+| 0.01 | 99% | High-risk: pricing personalization, checkout flow changes |
+
+### Statistical power (1 − β) — detecting real effects
+
+Probability of correctly rejecting H₀ when H₁ is true. β is the Type II error rate (false negative: a genuinely better model gets killed).
+
+| 1 − β | When to use |
+| --- | --- |
+| 0.80 | Standard — most rec-sys experiments |
+| 0.90 | High-value surfaces (homepage, search ranking) |
+| 0.95+ | Revenue-critical personalization (pricing, promotions) |
 
 <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/4F78D489-6828-4925-A1FF-26FFD92289AF.jpeg" width="40%">
 
-### Metric Selection: How to evaluate the experiment?
+### The four-way relationship
 
-**Invariate Metrics**
+**α**, **power**, **effect size**, and **sample size** are mathematically linked. Fix any three → the fourth is determined. In practice: fix α + power + minimum detectable effect → solve for sample size.
 
-- Invariate metrics are used for "sanity checks", that is, to make sure our experiment (the way we presented a change to a part of the population **treatment group**, as well as the way we collected the data) is not inherently wrong. Basically, this means we pick metrics which we consider not to change (not to be affected) because of our experiment and later make sure these **metrics don't change drastically between our control and treatment  groups.** This ensures the samples in the control and treatment groups are randomly and evenly distributed and not biased or different.
+---
 
-**Evaluation Metrics What is your success metric?**
+## 4. Metric Selection
 
-- Decide on the metrics which will decide the possible outcome of the ab test
-    - Only two possible outcomes, **discrete** alternative, (Yes/No; Click/No-Click)
-    - It can be a **continuous** category which covers session time, savings, loss after and before implementing a feature.
-- Usually, the categorical feature requires more samples than the continuous features
+### Invariant metrics (sanity checks)
 
-### Effect Size and Baseline Metric: What is the amount of effect desired?
+Should **not** change between groups. If they do, randomization is broken.
 
-### **Baseline Metric**
+| Invariant metric | What it catches |
+| --- | --- |
+| Users per group | Uneven traffic splitting |
+| Platform distribution (iOS/Android) | Sampling bias |
+| Avg page load time | Treatment causing latency, confounding engagement |
+| Recommendation request volume | Backend routing errors |
 
-- Before we start our experiment we should know the current value of the metric we're using to evaluate the efficacy of the test i.e.  how these metrics behave before the change - that is, that is called the  **baseline values.**
+### Evaluation metrics
 
-    **Example:** 
+| Type | Rec-sys examples | Note |
+| --- | --- | --- |
+| **Binary** | Click-through (click/no-click), add-to-cart, purchase conversion | Needs more samples |
+| **Continuous** | Revenue per session, watch time, session duration, items browsed | Needs fewer samples |
 
-    - So,  if today `30%` of the people that try  vanila cupcakes want to have a second one, the `baseline metric is 0.3`.  With this information, we can determine the scope for  improvement with new experimentation/ideas is `high 70%`.
-    - On the other hand, For instance,  if the  baseline metric was instead `95%` like 95 out of 100 people ask for 2nd vanila cupcake then the  recipe is already a success and here is very little room for improvement `5%`, which may or may not justify the effort of running more tests to fine tune the recipe. As a result we can't  expect  improvement greater than 5%. This is agood check to understand the value we can get out of the test and if the level of effort to make a change is worth it or not.
+A good experiment tracks **one primary metric** (e.g., CTR) plus **guardrail metrics** (e.g., revenue, diversity of recs, coverage) to ensure the new model doesn't win on clicks while degrading something else.
 
-### **Effect Size**
+---
 
-- Effect size is  the magnitude of **difference** between averages/proportions  of **treatment  and control group**. It is the variance in averages between test and control groups divided by the standard deviation of the control i.e. The standardized difference between 2 groups. It has the units stdev. So an effect size of 1 is equal to a difference of 1 stdev. between groups. **In a nutshell “effect size” which is a simple way to measure the effect of a treatment.**
+## 5. Effect Size
 
-    Example: 
+The **standardized magnitude of difference** between groups. Measures *how big* the effect is, not just whether it exists. Units: standard deviations.
 
-    **Effect size for means**
+### Baseline metric
 
-    - The average of purchases (purchase_mean_control_group) is `0.7` and the standard deviation (purchase_std_control_group) is `0.84`.
-    - If we want to increase the purchase_mean to `0.75` in this experiment. We can calculate the effect size like below:
+Establish the current value before running the test.
 
-        ```
-        **effect_size** = (0.75 - purchase_mean_control_group)/purchase_std_control_group 
-        ```
+> **Example:** Your homepage "Recommended for You" carousel has a 12% CTR (baseline = 0.12). There's 88% room for improvement — worth testing a new ranking model. If the baseline were 95%, the max possible lift is 5 pp, which may not justify the engineering cost of a new model.
 
-    **Effect size for proportions** 
-
-    ```
-    **effect_size** = 2 * (arcsin(sqrt(p1)) - arcsin(sqrt(p2))) 
-
-    **#python implementation**
-    import statsmodels.stats.api as sms
-    baseline_cvr=0.1
-    mini_diff=0.1*baseline_cvr #10% difference we want to see 
-    **effect_size**=sms.proportion_effectsize(baseline_cvr, baseline_cvr+mini_diff)
-    **effect size for a 10% increase from baseline -0.0326**
-    ```
-
-        
-
-### Samples Needed to perform the experiment **How many samples need to be in the experiment?**
-
-- **Effect Size**.  [Effect size](https://machinelearningmastery.com/effect-size-measures-in-python/) is calculated using a specific statistical measure, such as Pearson’s correlation coefficient for the relationship between variables or Cohen’s d for the difference between groups.
-- **Sample Size**. The number of observations in the sample. **(n)**
-- **Significance**. The significance level used in the statistical test, e.g. alpha. 1% and 5%. These correspond to confidence intervals of 90% and 95%, respectively. **(alpha)**
-- **Statistical Power**. The probability of accepting the alternative hypothesis if it is true. **(1-beta)**
-
-There can be a variety of formulas based on different use-case. This **[link](https://sphweb.bumc.bu.edu/otlt/MPH-Modules/BS/BS704_Power/BS704_Power_print.html)** covers almost all the use-cases with examples. The different versions using **statsmodels.stats.api** with  [**Python Implementation**](http://jpktd.blogspot.com/2013/03/statistical-power-in-statsmodels.html) 
-
-Few examples. They will have to be calculated per metric. 
-
-- **This type is applicable for all the categorical and binary metrics (Proportions)**
-
-<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-16_at_12.20.38_PM.png" width="40%">
-    
-    **omega** here is the  minimum detectable change to make this experiment worth it. 
-
-    **omega** is the minimum detectable change
-
-**Sample Code for  calculating minimum samples to compare for two Proportions (Normal Approximation)**
-
-```sql
-import statsmodels.stats.api as sms
-baseline_cvr=0.1
-alpha=0.05
-power=0.8
-mini_diff=0.1*baseline_cvr
-effect_size=sms.proportion_effectsize(baseline_cvr, baseline_cvr+mini_diff)
-sample_size=sms.NormalIndPower().solve_power(effect_size=effect_size, power=power, alpha=alpha, ratio=1)
-print('Required sample size ~ {0:.1f}'.format(sample_size) + ' per group')
-#Output:
-#Required sample size ~ 14744.1 per group
-```
-
-**Sample Code for  calculating minimum samples to compare for two Means (Normal Approximation)**
-
-- **This is used for continuous variable (Means)**
-
-    <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-16_at_12.25.59_PM.png" width="40%">
-
-```sql
-import statsmodels.stats.api as sms
-effect_size = 0.1
-alpha = 0.05 # significance level
-power = 0.8
-sample_size = sms.TTestIndPower().solve_power(effect_size = effect_size, power = power, alpha = alpha)
-print('Required sample size ~ {0:.1f}'.format(sample_size) + ' per group')
-#Output:
-#Required sample size ~ 1570.7 per group
-```
-
-**Relationship between minimum sample size required vs minimum detectable difference**
-
-- Find the balance or trade-off among enought power(not miss opportunity/fail to detect improvement)
-- Minimum sample size (traffic volume) required.
-- effective size (worth to do the test if the metric increase/decrease how much)- minimum detectable difference
-
-    
-    <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/effect.png" width="40%">
-    
-
-    Sample Size vs Minimum Detectable Effective Size
+### Effect size for means (Cohen's d)
 
 ```python
-samplesize_list=[]
-baseline=0.1
-#set lift range: 5%~30% with 1% incrementality of baseline(0.1)
-deltas=np.arange(0.005, 0.03, 0.001)
+# Scenario: testing whether a new ranker increases avg revenue per session
+# Baseline: mean = $4.20, std = $3.50, target = $4.40
+effect_size = (4.40 - 4.20) / 3.50  # ≈ 0.057
+```
+
+### Effect size for proportions (Cohen's h)
+
+```python
+import statsmodels.stats.api as sms
+
+# Scenario: homepage carousel CTR — want to detect a 10% relative lift
+baseline_ctr = 0.12
+min_detectable_diff = 0.10 * baseline_ctr  # 1.2 pp absolute lift
+
+effect_size = sms.proportion_effectsize(baseline_ctr, baseline_ctr + min_detectable_diff)
+# effect_size ≈ -0.037
+```
+
+Formula: `h = 2 * (arcsin(sqrt(p1)) - arcsin(sqrt(p2)))`
+
+---
+
+## 6. Sample Size Calculation
+
+### For proportions (binary: clicked / didn't click)
+
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-16_at_12.20.38_PM.png" width="40%">
+
+Where **ω** = minimum detectable change.
+
+```python
+import statsmodels.stats.api as sms
+
+# How many users to detect a 10% relative lift in carousel CTR?
+baseline_ctr = 0.12
+alpha = 0.05
+power = 0.80
+min_diff = 0.10 * baseline_ctr  # 1.2 pp
+
+effect_size = sms.proportion_effectsize(baseline_ctr, baseline_ctr + min_diff)
+sample_size = sms.NormalIndPower().solve_power(
+    effect_size=effect_size, power=power, alpha=alpha, ratio=1
+)
+print(f"Required: {sample_size:.0f} users per group")
+# Output: ~8,600 users per group
+```
+
+### For means (continuous: revenue, session time)
+
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-16_at_12.25.59_PM.png" width="40%">
+
+```python
+import statsmodels.stats.api as sms
+
+# How many users to detect a shift in avg revenue per session?
+effect_size = 0.1  # small effect (Cohen's d)
+alpha = 0.05
+power = 0.80
+
+sample_size = sms.TTestIndPower().solve_power(
+    effect_size=effect_size, power=power, alpha=alpha
+)
+print(f"Required: {sample_size:.0f} users per group")
+# Output: ~1,571 users per group
+```
+
+### Trade-off: sample size vs detectable effect
+
+Smaller effects need exponentially more users. This plot helps decide: is detecting a 0.5 pp CTR lift worth running the test for 4 weeks instead of 1?
+
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/effect.png" width="40%">
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+import statsmodels.stats.api as sms
+
+baseline = 0.12
+deltas = np.arange(0.005, 0.03, 0.001)
+sizes = []
+
 for delta in deltas:
-  prob2=baseline_cvr+delta
-  effect_size=sms.proportion_effectsize(baseline, prob2)
-  sample_size=sms.NormalIndPower().solve_power(effect_size=effect_size, power=0.8, alpha=0.05, ratio=1)
-  samplesize_list.append(sample_size)
-plt.plot(deltas, samplesize_list)
-plt.title('Minimum required sample size for minimum detectable delta/effective size')
-plt.ylabel('Required Sample Size')
-plt.xlabel('Minimum Detectable effective size')
+    es = sms.proportion_effectsize(baseline, baseline + delta)
+    n = sms.NormalIndPower().solve_power(effect_size=es, power=0.8, alpha=0.05, ratio=1)
+    sizes.append(n)
+
+plt.plot(deltas * 100, sizes)
+plt.title("Sample Size vs Minimum Detectable CTR Lift")
+plt.ylabel("Users per Group")
+plt.xlabel("Minimum Detectable Lift (percentage points)")
 plt.tight_layout()
 plt.show()
 ```
 
-### Collecting and Analyzing the data collected for the **control** and treatment group: **What to do once we have the data collected?**
+### Running the experiment
 
-- We want to ensure we run the test long enough to collect enough data as calculated in the previous step. Otherwise, it'll be hard to tell whether there was a statistically significant difference between the two variations
-- Also, split of traffic not to be 50–50 and allocate more traffic to version A, in case you are concerned about losses due to version B. However, keep in mind that a very skewed split often leads to longer times before the A/B testing becomes *(statistically)* *significant*.
+- **Don't stop early.** Peeking inflates false positive rates. Commit to the calculated sample size.
+- **Traffic split** doesn't have to be 50/50. Allocate 90/10 if the new model is risky (e.g., untested ranker on high-traffic surface), but expect longer test duration.
 
-**Checks for invariant metrics:**
+### Pre-analysis checklist
 
-- Firstly we want to make sure all the invariant metrics does not show statistically  significant change between the two groups to ensure the study is not biased.
-- This also ensures the data we have collected is right.
+1. **Invariant metrics** — confirm no significant difference. If users-per-group or platform-split is off, the experiment is compromised.
+2. **Distribution check** — plot density/boxplots for each evaluation metric per group. Run **Shapiro-Wilk** to test normality.
+3. **Choose test** — normal data → parametric; non-normal or binary → non-parametric.
+4. **Report correctly** — normal: mean ± CI. Non-normal: median with Q1/Q3.
 
-**Check for effect size on the Evaluation Metrics**
+---
 
-- The next step is looking at the changes between the control and experiment groups with regard to our evaluation metrics to make sure the difference is there, that it is statistically significant and most importantly practically significant (the difference is "big" enough to make the experimented change beneficial to the company.
+## 7. Data Distributions
 
-### How do we know what test to conduct on each of these metrics we collected?
+### Binomial distribution
 
-- We must  **plot the distributions of key variables**. In an RCT we have 2 or more groups **(e.g. Control and treatment)** to observe. Plotting density plots or boxplots for each key variable at the start of the analysis is helpful in determining the distribution of the data which is very **critical to the test we use becasue of the underlying assumptions.**
-- We should also run a **Shapiro test** on our data to make sure it is normal *before* deciding what method to use (e.g. a T-test or a Wilcoxon test).
-- Always report the p-value with **means and confidence intervals** for normal distributed data OR with **medians** and first and third quartiles for non-normal data.
+**Rec-sys use case:** Did the user click the recommendation? (yes/no). Did the user convert? (yes/no).
 
-The following sections on **"Data Distribution"** and "**Parametric and Non-Parametric Test"**  will help decide ****what static test to be used to measure each of the invariant metrics and evaluation metrics and draw conclusions about them at a chosen level of significance (alpha).
-
-## **Data Distribution**
-
-### Binomial Distribution **P(x success in N trials)**
-
-**Only two possible outcomes**
-
-**In order for a variable X to be a binomial random variable,**
-• Each trial must be independent,
-• Each trial can be called a “success” or “failure,”
-• There are a fixed number of trials, and
-• The probability of success on each trial is constant.
+Conditions: (1) independent trials, (2) two outcomes, (3) fixed n, (4) constant probability.
 
 <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-16_at_12.42.09_PM.png" width="40%">
 
-**Probability Mass Function**
+**PMF:** P(x successes in n trials)
 
 <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-16_at_12.38.15_PM.png" width="40%">
 
-**p= rate of success**
-
-**x= number of success** 
-
-**n=number of trials** 
-
-**Code to create probablity Mass Function** 
-
 ```python
-import matplotlib.pyplot as plt
 from scipy.stats import binom
 import numpy as np
+import matplotlib.pyplot as plt
 
-# Determine the probability of having x number of click throughs
+# Scenario: comparing click counts on control vs treatment carousel
 clicks = np.arange(20, 80)
-num_a, num_b = 550, 450
-click_a, click_b = 48, 56
-rate_a, rate_b = click_a / num_a, click_b / num_b
-prob_a = binom(num_a, rate_a).pmf(clicks)
-prob_b = binom(num_b, rate_b).pmf(clicks)
+n_control, n_treatment = 550, 450
+clicked_control, clicked_treatment = 48, 56
+rate_control = clicked_control / n_control   # 8.7% CTR
+rate_treatment = clicked_treatment / n_treatment  # 12.4% CTR
 
-# Make the bar plots.
-plt.bar(clicks, prob_a, label="A", alpha=0.7)
-plt.bar(clicks, prob_b, label="B", alpha=0.7)
+prob_control = binom(n_control, rate_control).pmf(clicks)
+prob_treatment = binom(n_treatment, rate_treatment).pmf(clicks)
+
+plt.bar(clicks, prob_control, label="Control (CF ranker)", alpha=0.7)
+plt.bar(clicks, prob_treatment, label="Treatment (two-tower)", alpha=0.7)
 plt.legend()
-plt.xlabel("Num converted"); plt.ylabel("Probability");
+plt.xlabel("Number of clicks")
+plt.ylabel("Probability")
 plt.show()
 ```
 
-
 <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/binomial.png" width="40%">
 
+### Normal distribution
 
-Probability Mass Function for Group A and Group B with given success rate
+**Rec-sys use case:** Revenue per session, watch time, time-to-first-click — continuous metrics that tend toward normal with enough users.
 
-### **Normal Distribution**
+Key properties:
 
-**Application example: the amount of time a user spends on a website, can the ratings be used to recommend products to the user.** 
+| Property | Value |
+| --- | --- |
+| Mean = median = mode | Center of distribution |
+| 1σ | 68% of data |
+| 2σ | 95% of data |
+| 3σ | 99.7% of data |
 
-- The mean and median and mode  fall at the center of the ideal normal distribution
-- aread under the curve is all the 1.0 and 100%
-- normal distribution follows emperical rule 68-95-99.7
-    - 2sigma covers 68% of the data
-    - 4sigma covers 95% of the data
-    - 6sigma covers 99.7% of the data
-    - little tails 0.03 % of the data and equally divided on both sides.
-- percentile 95th means 95% of the data lies below that curve
-- Other forms of Gaussian is t-distribution/exponential distribution
-
-**Z-score :** 
-
-- how far is value from the mean in terms of standard deviations, in terms of percentile
-- $z= (X-u)/sigma$ u is mean, X is data point, sigma is std deviation.
-- for ex: if mean is 16 and the value we are looking for is 17.5, and std is 1, (17.5-16)/1 z-score is 1.5 then we look into the table it says this value z-table is 93.38% above all the values.
-- If the value of z is 1.5 that means its 1.5 std above the mean and the area under the curve will always be the same.
-- The z value and the z-table is used to identify the percentage of area under the curve, which is also the **p-value**
-- z-score always give area **left to the curve**
-
-**z-statistic**
-
-- When **population standard deviation** **is known** we can use the z-score
-
-     <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/9EFFB6E2-024B-4DBB-B5DE-9065943FF75D.jpeg" width="40%">
-
-- When **population standard deviation is unknown and we have sample greater  than 30 samples,** we use z-statistic for proportions only if we can assume the population is normally distributed, we use sample standard deviation in the formula, that can be proven by
-
-    
-     <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/67898C9F-77A8-4CA7-B993-73D0E8B21F36.jpeg" width="40%">
-
-
-       
-
-- **z-test for comparing two proportions**
-
-   
-    <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-18_at_10.37.00_AM.png" width="40%">
-
-```sql
-from statsmodels.stats.proportion import proportions_ztest
-import pandas as pd
-import numpy as np
-X1, X2 = [486, 527]
-n1, n2 = [5000, 5000]
-conversions = np.array([X1, X2])
-clicks = np.array([n1, n2])
-
-zscore, pvalue = proportions_ztest(conversions, clicks, alternative = 'two-sided') #two-sided indicates two-tailed test
-print('zscore = {:.4f}, pvalue = {:.4f}'.format(zscore, pvalue))
-# [output]: zscore = -1.3589, pvalue = 0.1742
-```
-
-**Probability Density Function**
-
+**PDF:**
 
 <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-16_at_9.57.05_PM.png" width="40%">
 
-- It means how much probability is concentrated per unit length (d𝒙) near 𝒙, or how dense the probability is near 𝒙. x is any point on the x-axis and y is the ***P(x)***
+PDF gives density at a point — how concentrated probability is near x. Actual probability over an interval = integral of PDF.
 
-The probability Density curve is not the same as the Probability of a function at (X=x). It is the integral of the probability density function.
+**Effect of shifting mean** (σ fixed) — curve slides horizontally:
 
-**Probability Density Function with varying mean**
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-19_at_2.04.23_AM.png" width="40%">
 
-- What does this really mean?
-    - It means if we have a  set of data say between `1000` linearly spaced points between `(-4 to 4)` and we plot a graph for `mean =1,2,3`  and keeping sigma constant at `1`.
-    - The observation is the graph moves to the right which actually means the **density is moving towards the mean.**
-    
-    <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-19_at_2.04.23_AM.png" width="40%">
+**Effect of increasing σ** (mean fixed) — curve flattens and widens:
 
-**Probability Density Function with varying standard deviation**
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-19_at_1.58.49_AM.png" width="40%">
 
-- What does this really mean?
-    - It means if we have a  set of data say between `1000` linearly spaced points between `(-10 to 10)` and we plot a graph for constant `mean =0` and keeping varying the sigma between `[2,4,6]`.
-    - The observation is the graph gets broader which means the **probability** **density is spreading out.**
-    
-    <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-19_at_1.58.49_AM.png" width="40%">
+#### Z-score and z-statistic
 
-### Student’s T-distribution
+**Z-score** = distance from the mean in standard deviations: `z = (X − μ) / σ`
 
-- The T-distribution is used instead of the normal distribution when you have small samples (usually in practice less than 30).
-- The larger the size of your sample, the more the t-distribution looks like the normal one. In fact, for sample sizes larger than 30 (e.g. more degrees of freedom), the distribution almost exactly follows the shape of the normal curve.
+> Example: avg session revenue μ = $4.20, σ = $1.00. A user with $5.70 has z = 1.5 → z-table says 93.38% of users spend less. This area is the p-value for a one-tailed test.
 
-**Mean and Standard Deviation of t-distribution** 
+**When to use z vs t:**
 
+| Condition | Statistic |
+| --- | --- |
+| Population σ known | z |
+| σ unknown, n > 30 | z (sample σ ≈ population σ) |
+| σ unknown, n ≤ 30 | t |
+
+**z-statistic formulas:**
+
+One-sample:
+
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/9EFFB6E2-024B-4DBB-B5DE-9065943FF75D.jpeg" width="40%">
+
+Sample (σ unknown, n > 30):
+
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/67898C9F-77A8-4CA7-B993-73D0E8B21F36.jpeg" width="40%">
+
+Two proportions (e.g., comparing CTR between groups):
+
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-18_at_10.37.00_AM.png" width="40%">
+
+```python
+from statsmodels.stats.proportion import proportions_ztest
+import numpy as np
+
+# 486 out of 5000 clicked in control, 527 out of 5000 in treatment
+conversions = np.array([486, 527])
+users = np.array([5000, 5000])
+
+zscore, pvalue = proportions_ztest(conversions, users, alternative="two-sided")
+print(f"z = {zscore:.4f}, p = {pvalue:.4f}")
+# z = -1.3589, p = 0.1742 → fail to reject H₀, no significant CTR difference
+```
+
+### Student's t-distribution
+
+Used when n is small (< 30). Shape depends on **degrees of freedom (df = n − 1)**: low df → heavier tails. Converges to normal as df increases.
+
+**Rec-sys use case:** Pilot test of a new recommendation model on a small user cohort (e.g., 25 users per group).
 
 <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-16_at_10.11.25_PM.png" width="40%">
 
 <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-16_at_10.10.57_PM.png" width="40%">
 
-**t-distribution function**
-
+**t-distribution PDF:**
 
 <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-16_at_10.11.15_PM.png" width="40%">
 
-**t-score**
+**t-score:**
 
-- When **population standard deviation is unknown and we have a sample greater than 30 samples**, we use t-statistic, we use sample standard deviation in the formula.
-- When **population standard deviation is unknown and we have sample size less  than 30 samples,** we use t-statistic only if we can assume the population is normally distributed,
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-16_at_10.11.31_PM.png" width="40%">
 
+| Condition | Statistic |
+| --- | --- |
+| σ unknown, n > 30 | t (also valid with z) |
+| σ unknown, n ≤ 30 | t (requires approx. normal population) |
 
- <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-16_at_10.11.31_PM.png" width="40%">
+### Chi-square distribution
 
-### Chi-Square Distribution
+Special case of gamma distribution. One parameter: **degrees of freedom (ν)**.
 
-- Chi-square distribution is a special case of gamma-distribution (just like T-distribution), and has only one parameter: degrees of freedom (ν), which is as simple as number of possible categories minus one.
-- The distribution only has positive values, and it is right-screwed.
-- Its shape varies depending on ν: from very asymmetric with low ν, to almost normally-shaped with very high ν(with ν approaches infinity, chi-square distribution becomes normal distribution)
+**Rec-sys use case:** Do users in control vs treatment groups distribute differently across product categories (electronics, clothing, books)?
 
-**Mean and Standard Deviation of t-distribution**
+Properties: positive values only, right-skewed. Mean = ν, std = √(2ν). Approaches normal as ν → ∞.
 
-- The mean of the distribution is equal to the number of degrees of freedom:
-    
-    <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-16_at_11.30.37_PM.png" width="40%">
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-16_at_11.30.37_PM.png" width="40%">
 
-- The standard deviation is equal to the square root of two times the number of degrees of freedom:
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-16_at_11.30.41_PM.png" width="40%">
 
-    
-     <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-16_at_11.30.41_PM.png" width="40%">
+**Chi-square statistic:** χ² = Σ (Oᵢ − Eᵢ)² / Eᵢ
 
-**chi-square statistic**
+<img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-16_at_11.33.19_PM.png" width="40%">
 
-- *Oi is the number of times i-category occurred in a sample*
-- Ei is the assumption for the number of times i-category is should occur in a sample (expected frequency)
-
-    
-    <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-16_at_11.33.19_PM.png" width="40%">
-
-
-    Example is well explained here in this article: [https://towardsdatascience.com/the-ultimate-guide-to-a-b-testing-part-4-non-parametric-tests-4db7b4b6a974](https://towardsdatascience.com/the-ultimate-guide-to-a-b-testing-part-4-non-parametric-tests-4db7b4b6a974)
-
-**The probability density function for chi2 is:**
-
-k = degree of freedom
+**PDF** (k = degrees of freedom):
 
 <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-16_at_11.35.38_PM.png" width="40%">
 
 <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-20_at_5.33.06_PM.png" width="40%">
 
-## **Parametric Test**
+---
 
-All statistical tests can be divided into two main groups: **parametric** and **non-parametric**. Both groups serve to solve more or less the same problems, but do it in a bit different situations: 
+## 8. Parametric Tests
 
-**Parametric tests** are used only when a normal (or close to normal) distribution is assumed. The most widely used tests are the **Z-test,** **t-test,** and **ANOVA.** Average session length is normally distributed, so we can use **parametric tests** to check the significance of the difference
+Assume data is normally distributed. Use for continuous metrics like revenue, session time, items viewed.
 
-### **Z test (Z statistic):**
+### Z-test
 
-- In a z-test, the sample is assumed to be **normally distributed**.
-- A z-score is calculated with population parameters such as **“population mean” or  “population proportion” and “population standard deviation”** and is used to validate a hypothesis that the sample drawn belongs to the same population.
+**When:** Population σ known, or n > 30.
 
 ```python
-def ztest_comparing_two_proportions(X1,X2,n1,n2):
-    p1_hat = X1/n1
-    p2_hat = X2/n2
-    p_bar = (X1+X2)/(n1+n2)
-    q_bar = (1-p_bar)
-    z_diff= p1_hat-p2_hat
-    z_sd = np.sqrt((1/n1+1/n2)*p_bar*q_bar)
-    z_score = z_diff/z_stf
-    p_value = norm().cdf(z_score)
-    return z_diff, p_value,z_sd,z_score  
+import numpy as np
+from scipy.stats import norm
 
-#X1 = count of success (1's or True or Win or Converted) in group A
-#n1 = count of total samples in group A
-#X2 = count of success (1's or True or Win or Converted) in group B
-#n2 = count of total samples in group B
+def ztest_two_proportions(X1: int, X2: int, n1: int, n2: int):
+    """Compare conversion rates between control and treatment.
+
+    X1, X2: conversions (clicks, purchases) per group
+    n1, n2: total users per group
+    """
+    p1_hat = X1 / n1
+    p2_hat = X2 / n2
+    p_bar = (X1 + X2) / (n1 + n2)
+    q_bar = 1 - p_bar
+
+    se = np.sqrt((1/n1 + 1/n2) * p_bar * q_bar)
+    z_score = (p1_hat - p2_hat) / se
+    p_value = norm.cdf(z_score)  # one-tailed; × 2 for two-tailed
+
+    return z_score, p_value, se
 ```
 
-### **T-test (T statistic):**
+### T-test
 
-- **A t-test is used when the population parameters (mean and standard deviation) are not known.**
-- **T-test (T statistic):** A t-test is used to compare the mean of two given samples. Like a z-test, a t-test also assumes a normal distribution of the sample.
+**When:** Population σ unknown. Assumes normal distribution.
 
-    There are three versions of t-test
+| Variant | Rec-sys use case |
+| --- | --- |
+| **Independent samples** | Compare avg revenue per session: control vs treatment |
+| **Paired samples** | Same users, before/after a ranking model change |
+| **One-sample** | Is avg watch time in treatment > 30 min target? |
 
-    1. Independent samples t-test which compares mean for two groups
-    2. Paired sample t-test which compares means from the same group at different times
-    3. One sample t-test which tests the mean of a single group against a known mean.
-
-```sql
+```python
 from scipy.stats import ttest_ind
-order_value_control_group = np.random.normal(0,1.11, 50)
-order_value_experimental_group = np.random.normal(0,1.84, 32)
-tscore, pval= **ttest_ind(order_value_control_group, order_value_experimental_group, equal_var=True)**
-print(f"Zscore is {zscore:0.2f}, p-value is {prob:0.3f} (two tailed), {prob/2:0.3f} (one tailed)"
+import numpy as np
+
+# Comparing avg revenue per session between ranker variants
+revenue_control = np.random.normal(4.20, 3.50, 5000)
+revenue_treatment = np.random.normal(4.40, 3.80, 5000)
+
+t_score, p_value = ttest_ind(revenue_control, revenue_treatment, equal_var=True)
+print(f"t = {t_score:.2f}, p = {p_value:.4f} (two-tailed)")
 ```
 
-### **Welch test:**
+### Welch's t-test
 
-- **Welch test:** IIf the data is normal, then we should always use the Welch test (and ignore the T-test) if we have  **unequal sample sizes and unequal variances**, which we will often come across in the real world than the t-test
-- Welsch’s t-test is meant for continuous data
-- If the data is discrete like  `0` and `1` options. A better option  is the Mann-Whitney U statistic.
+**When:** Normal data, but **unequal sample sizes and/or unequal variances** — the default in practice. Always prefer Welch's over standard t-test unless you've confirmed equal variance.
 
-```sql
+```python
 from scipy.stats import ttest_ind
-order_value_control_group = np.random.normal(0,1.11, 50)
-order_value_experimental_group = np.random.normal(0,1.84, 32)
-tscore, pval= **ttest_ind(order_value_control_group, order_value_experimental_group, equal_var=False)**
-print(f"Zscore is {zscore:0.2f}, p-value is {prob:0.3f} (two tailed), {prob/2:0.3f} (one tailed)"
+import numpy as np
+
+# Unequal groups: 70/30 traffic split to reduce risk of new model
+revenue_control = np.random.normal(4.20, 3.50, 7000)
+revenue_treatment = np.random.normal(4.40, 3.80, 3000)
+
+t_score, p_value = ttest_ind(revenue_control, revenue_treatment, equal_var=False)
+print(f"t = {t_score:.2f}, p = {p_value:.4f} (two-tailed, Welch)")
 ```
 
-The following graphs shows how Welch test performs much better with **unequal sample sizes and variance**. the p-values in the left graph between 0-0.05, area of rejection is much higher where it should be only 5% based on alpha 0.05 hence it can lead to wrong results and inferences, where as welch test doesn't do that and much better suited for unuequal mean and variances. 
+**Why Welch's matters:** Standard t-test with unequal variance inflates false positive rates — the rejection area in [0, 0.05] is much larger than the nominal 5%.
 
 <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/ttest.png" width="40%">
 
 <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/welch_test.png" width="40%">
 
-- **ANOVA (F-statistic):** Similar to a T-test, ANOVA can tell you how significant the differences between groups are. While a t-test compares 2 groups, ANOVA test can do more than two groups.
-    1. One-way ANOVA: It is used to compare the difference between the three or more samples/groups of a single independent variable.
-    2. MANOVA: MANOVA allows us to test the effect of one or more independent variable on two or more dependent variables. In addition, MANOVA can also detect the difference in co-relation between dependent variables given the groups of independent variables.
+For binary data (clicked/didn't), use Mann-Whitney U instead.
 
-## **Non-Parametric Test**
+### ANOVA (F-statistic)
 
-**Non-parametric tests** are used when continuous data is not normally distributed or when data is discrete. Some of the representatives are **chi-squared** and **Fisher’s exact tests, Mann–Whitney U-test. e.g.** Day-1 retention and conversion are binomial distributions (there are two outcomes for both cases: returned/churned, converted/didn’t convert), which means that we’ll need to use **non-parametric tests**
+**When:** Comparing **3+ groups** — e.g., testing three different ranking models simultaneously.
 
-### **chi-squared test:**
+| Variant | Use case |
+| --- | --- |
+| **One-way ANOVA** | One factor (ranker variant), multiple groups |
+| **MANOVA** | Multiple factors (ranker + layout), multiple metrics (CTR + revenue) |
 
-- **chi-squared test:** This test works only for categorical data when you have two or more categories and want to check if there is a significant difference between them.
-- A **chi-square goodness of fit test** determines if a sample data matches a population.
-- A **chi-Square test for independence** compares two variables in a contingency table to see if they are related. In a more general sense, it tests to see whether distributions of categorical variables differ from each another:
+---
 
-### **Fisher’s exact test**
+## 9. Non-Parametric Tests
 
-- **Fisher’s exact test:** Fisher’s exact test is a non-parametric  when the data set is small or categories are imbalanced instead of the chi-square test
+No distribution assumption. Use for binary outcomes (click/no-click, convert/churn) or non-normal continuous data.
 
-    ```python
-    from scipy.stats import fisher_exact
-    oddsratio, pvalue = fisher_exact([[50, 2450], [42, 2458]])
-    ```
+### Chi-squared test
 
-Working is well explained here: [https://towardsdatascience.com/the-ultimate-guide-to-a-b-testing-part-4-non-parametric-tests-4db7b4b6a974](https://towardsdatascience.com/the-ultimate-guide-to-a-b-testing-part-4-non-parametric-tests-4db7b4b6a974)
+**When:** Categorical outcomes with 2+ categories.
 
-Method I: use proportions test
+**Rec-sys use case:** Does the new ranker change the distribution of which product categories users click on?
+
+Two variants:
+- **Goodness of fit** — does the category distribution match the expected baseline?
+- **Test of independence** — is conversion rate independent of which ranker group users are in?
+
+**Method 1: Proportions test**
 
 ```python
 import statsmodels.stats.proportion as proportion
 import numpy as np
-converted = np.array([486, 527])
-clicks = np.array([5000, 5000])
-chisq, pvalue, table = proportion.proportions_chisquare(converted, clicks)
-print('chisq =%.3f, pvalue = %.3f'%(chisq, pvalue))
-print("Contingency Table:")
-print(table)
 
+# 486/5000 converted in control, 527/5000 in treatment
+converted = np.array([486, 527])
+users = np.array([5000, 5000])
+
+chisq, pvalue, table = proportion.proportions_chisquare(converted, users)
+print(f"χ² = {chisq:.3f}, p = {pvalue:.3f}")
 ```
 
-Method II: Use contingency table — the traditional way
+**Method 2: Contingency table**
 
 ```python
 import scipy.stats as stats
-from scipy.stats import chi2
-ob_table = np.array([[4514,  486], [4473,  527]])
-result = stats.chi2_contingency(ob_table, correction = False)  # correction = False due to df=1
-chisq, pvalue = result[:2]
-print('chisq = {}, pvalue = {}'.format(chisq, pvalue))
-```
-
-### **Mann–Whitney U-test:**
-
-- **Mann–Whitney U-test:**
-- The Mann-Whitney U test is a nonparametric statistical significance test for determining whether two independent samples were drawn from a population with the same distribution.
-- Mann-Whitney U test is commonly used to compare differences between two independent groups when the dependent variable is not normally distributed.
-- Use only when the number of observation in each sample is `> 20` and you have `2` independent samples of ranks. Mann-Whitney U is significant if the u-obtained is LESS THAN or equal to the critical value of U.
-- **The test is specifically for non-parametric distributions, which do not assume a specific distribution for a set of data. Because of this, the Mann-Whitney U Test can be applied to any distribution, whether it is Gaussian or not.**
-
-```sql
 import numpy as np
-from scipy.stats import mannwhitneyu
-sample1=[32, 34, 29, 39, 38, 37, 38, 36, 30, 26]
-sample2=[40, 34, 30, 39, 38, 37, 38, 36, 50, 49]
-stat, pvalue=mannwhitneyu(sample1, sample2)
-print('statistics=%.3f, p=%.5f'%(stat,pvalue))
-alpha=0.05
-if pvalue> alpha:
-  print('Two Groups are from the Same distribution(fail to reject H0) under alpha=0.05')
-else:
-  print('Two Groups are from Different distributions(reject H0) under alpha=0.05')
+
+# rows: [didn't convert, converted] per group
+observed = np.array([[4514, 486], [4473, 527]])
+
+chisq, pvalue, dof, expected = stats.chi2_contingency(observed, correction=False)
+print(f"χ² = {chisq:.3f}, p = {pvalue:.3f}")
 ```
 
-### **Wilcoxon Text**
+### Fisher's exact test
 
-- **Wilcoxon Text:** A **good test for non normal data** with very few assumptions.
-- The Wilcoxon signed-rank test tests the null hypothesis that two related paired samples come from the same distribution. In particular, it tests whether the distribution of the differences x - y is symmetric about zero. It is a non-parametric version of the **paired T-test.**
-- The main assumptions here are:
-    - samples are randomly representative of population,
-    - samples are independent of each other ,
-    - values have an order (e.g. 3 is more than 1, but we can’t say that true is more than false).
+**When:** Small sample or imbalanced categories where chi-squared approximation breaks down.
+
+**Rec-sys use case:** Testing a new model on a niche category with few conversions (e.g., luxury items — 50 purchases across both groups).
 
 ```python
-**#the differences in height between group A and group B  is given as follows:**
-d = [6, 8, 14, 16, 23, 24, 28, 29, 41, -48, 49, 56, 60, -67, 75]
+from scipy.stats import fisher_exact
+
+# [purchased, didn't purchase] for control vs treatment
+oddsratio, pvalue = fisher_exact([[50, 2450], [42, 2458]])
+print(f"odds ratio = {oddsratio:.3f}, p = {pvalue:.4f}")
+```
+
+### Mann-Whitney U test
+
+**When:** Two independent groups, non-normal distribution. Non-parametric alternative to the independent t-test.
+
+**Rec-sys use case:** Comparing number of items added to cart (highly skewed — most users add 0, some add 20+).
+
+Requirements: n > 20 per group. Compares rank distributions — works on any shape.
+
+```python
+from scipy.stats import mannwhitneyu
+
+# Items added to cart per session (skewed distribution)
+cart_control = [0, 0, 0, 1, 0, 2, 0, 0, 3, 0, 1, 0, 0, 0, 5, 0, 0, 1, 0, 0, 0]
+cart_treatment = [0, 1, 0, 2, 0, 0, 3, 1, 0, 0, 0, 4, 0, 1, 0, 2, 0, 0, 1, 0, 3]
+
+stat, pvalue = mannwhitneyu(cart_control, cart_treatment)
+print(f"U = {stat:.1f}, p = {pvalue:.4f}")
+
+if pvalue > 0.05:
+    print("Fail to reject H₀: no significant difference in cart additions")
+else:
+    print("Reject H₀: treatment changed cart behavior")
+```
+
+### Wilcoxon signed-rank test
+
+**When:** Paired samples, non-normal data. Non-parametric alternative to the paired t-test.
+
+**Rec-sys use case:** Same users exposed to old and new ranker in sequential periods — compare the per-user difference in engagement.
+
+Assumptions: random representative samples, independent, values have natural order.
+
+```python
 from scipy.stats import wilcoxon
-w, p = wilcoxon(d)
-w, p
-Output: (24.0, 0.041259765625)
-**we would reject the null hypothesis at a confidence level of 5%, concluding that there is a difference in height between the groups.**
+
+# Per-user difference in clicks/week: (new ranker period) - (old ranker period)
+click_diffs = [6, 8, 14, 16, 23, 24, 28, 29, 41, -48, 49, 56, 60, -67, 75]
+
+w, p = wilcoxon(click_diffs)
+print(f"W = {w}, p = {p:.4f}")
+# W = 24.0, p = 0.0413 → reject H₀ at α=0.05
 ```
 
-## Drawing Conclusions
+### Quick reference: which test to use
 
-- The **minimum effect** we wanted to see is important in drawing conclusions about our test.
-- Based on the significance level we picked (5%) we can define our **confidence interval**. When we picked the minimum effect, we're saying that we wanted to see at least that amount of difference between the results of the control and the experiment tests.
-- For example, **the confidence interval for difference in distribution for the control and treatment group for the evaluation metric is between** `-0.39% and 0.08%`. Given the **minimum detectable level** defined in the practical significance level is `1%`, we could only **reject the null hypothesis if the confidence interval lower bound was above 1%.** Therefore we cannot reject the null hypothesis and conclude which landing page drives more conversions.
-- If making a change is  much more expensive or requires more time and labour to incorporate into the current workflow, the recommendation will be  to **keep the original design**. Because even if it may be statistically significant but it will not be practically significant for the bsuiness.
-- So we need to evaluate two things to recommend a change for a particular evaluatio metric
-    - It should be **statistically significant**
-    - It should be **practically significant** (i.e mimimum detectable difference should be  **above** lower bound of the confidence interval of the differenc between two distributions for control and treatment group)
+| Data | Normal? | Groups | Test | Rec-sys example |
+| --- | --- | --- | --- | --- |
+| Continuous | Yes | 2, equal var | T-test | Revenue/session, equal traffic split |
+| Continuous | Yes | 2, unequal var/size | **Welch's** | Revenue/session, 70/30 split |
+| Continuous | Yes | 2, paired | Paired t-test | Same users, before/after |
+| Continuous | Yes | 3+ | ANOVA | Testing 3 ranker variants |
+| Continuous | No | 2, independent | Mann-Whitney U | Cart size (skewed) |
+| Continuous | No | 2, paired | Wilcoxon | Per-user engagement diff |
+| Binary | — | 2+ | Chi-squared | Conversion rate |
+| Binary | — | 2, small n | Fisher's exact | Niche category conversions |
+| Proportions | — | 2 | Z-test | CTR comparison |
 
-**Code to calculate Confidence Interval for the difference between Two distributions and Margin of error** 
+---
 
-```sql
-#Calculate pooled standard error and margin of error
-se_pooled = math.sqrt(prob_pooled * (1 - prob_pooled) * (1 / total_users_control + 1 / total_users_treatment))
-z_score = st.norm.ppf(1 - confidence_level / 2)
-margin_of_error = se_pooled * z_score
+## 10. Drawing Conclusions
 
-#Calculate dhat, the estimated difference between probability of conversions in the experiment and control groups
-d_hat = (conversions_treatment / total_users_treatment) - (conversions_control / total_users_control)
+A result must clear **two bars** to ship:
 
-#Test if we can reject the null hypothesis
-lower_bound = d_hat - margin_of_error
-upper_bound = d_hat + margin_of_error
+### Bar 1: Statistically significant
 
-if practical_significance < lower_bound:
-    print("Reject null hypothesis")
-else: 
-    print("Do not reject the null hypothesis")
-    
-print("The lower bound of the confidence interval is ", round(lower_bound * 100, 2), "%")
+p-value < α → the observed difference is unlikely under H₀.
+
+### Bar 2: Practically significant
+
+The confidence interval lower bound exceeds the **minimum detectable effect** you defined upfront.
+
+> **Example:** You tested a new ranking model for homepage recommendations. The 95% CI for the CTR difference is [−0.39%, +0.08%]. Your minimum detectable effect was 1%. Since the lower bound is well below 1%, you **cannot reject H₀** — the new ranker doesn't demonstrate a meaningful improvement. Keep the existing model.
+
+Even a statistically significant result can be too small to justify the cost — model training infrastructure, latency overhead, engineering maintenance. If shipping the new ranker costs 2 engineer-months and the lift is 0.1 pp CTR, it may not be worth it.
+
+### Computing the confidence interval
+
+```python
+import math
+import scipy.stats as st
+
+# Example: comparing conversion rates between ranking model variants
+prob_pooled = (conversions_control + conversions_treatment) / (n_control + n_treatment)
+
+se_pooled = math.sqrt(
+    prob_pooled * (1 - prob_pooled) * (1/n_control + 1/n_treatment)
+)
+z = st.norm.ppf(1 - alpha / 2)
+margin = se_pooled * z
+
+d_hat = (conversions_treatment / n_treatment) - (conversions_control / n_control)
+
+lower = d_hat - margin
+upper = d_hat + margin
+
+print(f"CTR lift: {d_hat*100:.2f}%")
+print(f"95% CI: [{lower*100:.2f}%, {upper*100:.2f}%]")
+
+if min_detectable_effect < lower:
+    print("Ship it — statistically and practically significant")
+else:
+    print("Keep current model")
 ```
 
-## Pros and Cons of AB Testing
+---
 
-**Pros A/B split testing:** A/B split tests have several advantages, including these:
+## 11. Pros and Cons
 
-- **Useful in low-data rate tests.** If your landing page has only a few conversions per day, you simply can’t use a more advanced tuning method.
-- **Ease of implementation.** Many software packages support simple split tests. You even may be able to collect the data you need with your existing Web analytics tools.
-- **Ease of test design.** Split tests don't have to be carefully designed or balanced. You simply decide how many versions you want to test and then split the available traffic evenly among them.
-- **Ease of analysis.** Only very simple statistical tests are needed to determine the winners. All you have to do is compare the baseline version to each challenger to see if you’ve reached your desired statistical confidence level.
-- **Flexibility in defining the variable values.** The ability to mix and match allows you to test a range of evolutionary and revolutionary alternatives in one test, without being constrained by the more granular definition of variables in a multivariate test.
+| Pros | Cons |
+| --- | --- |
+| Works with low traffic — bandits/multivariate may not converge | One variable at a time — testing 5 ranker changes takes 5 sequential tests |
+| Simple to implement — most experimentation platforms support it | Inefficient data collection — learnings from test 1 don't reduce sample needs for test 2 |
+| Simple to design — just split traffic, no factorial design | |
+| Simple to analyze — standard statistical tests | |
+| Flexible — can compare evolutionary tweak vs radical redesign in one test | |
 
-**Cons A/B split testing:** A/B split tests also have their drawbacks, including these:
+---
 
-- **Limited number of recipes.** While you may want to test dozens of elements on your landing pages, because of the limited scope of split testing, you have to test your ideas one at a time.
-- **Inefficient data collection.** Conducting multiple split tests back to back is the most wasteful kind of data collection. None of the information from a previous test can be reused to draw conclusions about the other variables you may want to test in the future.
+## 12. Resources
 
-## Future work
-
-- Bayesian AB testing
-
-## Resources
-
-[https://machinelearningmastery.com/nonparametric-statistical-significance-tests-in-python/](https://machinelearningmastery.com/nonparametric-statistical-significance-tests-in-python/)
-
-[https://towardsdatascience.com/ab-testing-in-real-life-9b490b3c50d1](https://towardsdatascience.com/ab-testing-in-real-life-9b490b3c50d1)
-
-[https://towardsdatascience.com/introduction-to-statistics-e9d72d818745](https://towardsdatascience.com/introduction-to-statistics-e9d72d818745)
-
-[https://cosmiccoding.com.au/tutorials/ab_tests](https://cosmiccoding.com.au/tutorials/ab_tests)
-
-[https://towardsdatascience.com/the-ultimate-guide-to-a-b-testing-part-3-parametric-tests-2c629e8d98f8](https://towardsdatascience.com/the-ultimate-guide-to-a-b-testing-part-3-parametric-tests-2c629e8d98f8)
-
-[https://towardsdatascience.com/power-analysis-made-easy-dfee1eb813a](https://towardsdatascience.com/power-analysis-made-easy-dfee1eb813a)
-
-[https://towardsdatascience.com/statistical-tests-when-to-use-which-704557554740](https://towardsdatascience.com/statistical-tests-when-to-use-which-704557554740)
-
-[https://towardsdatascience.com/the-art-of-a-b-testing-5a10c9bb70a4](https://towardsdatascience.com/the-art-of-a-b-testing-5a10c9bb70a4)
-
-[https://towardsdatascience.com/determine-if-two-distributions-are-significantly-different-using-the-mann-whitney-u-test-1f79aa249ffb](https://towardsdatascience.com/determine-if-two-distributions-are-significantly-different-using-the-mann-whitney-u-test-1f79aa249ffb)
-
-[https://towardsdatascience.com/python-code-from-hypothesis-test-to-online-experiments-with-buiness-cases-e0597c6d1ec](https://towardsdatascience.com/python-code-from-hypothesis-test-to-online-experiments-with-buiness-cases-e0597c6d1ec)
-
-[https://medium.com/@robbiegeoghegan/implementing-a-b-tests-in-python-514e9eb5b3a1](https://medium.com/@robbiegeoghegan/implementing-a-b-tests-in-python-514e9eb5b3a1)
-
-[https://www.evanmiller.org/ab-testing/chi-squared.html](https://www.evanmiller.org/ab-testing/chi-squared.html)
-
-[https://github.com/baumanab/udacity_ABTesting#summary](https://github.com/baumanab/udacity_ABTesting#summary)
-
-[https://medium.com/@moggirain/a-complete-guide-about-a-b-testing-a1830410a0db](https://medium.com/@moggirain/a-complete-guide-about-a-b-testing-a1830410a0db)
-
-[https://towardsdatascience.com/introduction-to-statistics-e9d72d818745](https://towardsdatascience.com/introduction-to-statistics-e9d72d818745)
+- [Nonparametric Statistical Significance Tests in Python](https://machinelearningmastery.com/nonparametric-statistical-significance-tests-in-python/)
+- [A/B Testing in Real Life](https://towardsdatascience.com/ab-testing-in-real-life-9b490b3c50d1)
+- [Introduction to Statistics](https://towardsdatascience.com/introduction-to-statistics-e9d72d818745)
+- [A/B Tests Tutorial (Cosmic Coding)](https://cosmiccoding.com.au/tutorials/ab_tests)
+- [Ultimate Guide: Parametric Tests](https://towardsdatascience.com/the-ultimate-guide-to-a-b-testing-part-3-parametric-tests-2c629e8d98f8)
+- [Ultimate Guide: Non-Parametric Tests](https://towardsdatascience.com/the-ultimate-guide-to-a-b-testing-part-4-non-parametric-tests-4db7b4b6a974)
+- [Power Analysis Made Easy](https://towardsdatascience.com/power-analysis-made-easy-dfee1eb813a)
+- [Statistical Tests: When to Use Which](https://towardsdatascience.com/statistical-tests-when-to-use-which-704557554740)
+- [The Art of A/B Testing](https://towardsdatascience.com/the-art-of-a-b-testing-5a10c9bb70a4)
+- [Mann-Whitney U Test](https://towardsdatascience.com/determine-if-two-distributions-are-significantly-different-using-the-mann-whitney-u-test-1f79aa249ffb)
+- [Hypothesis Test to Online Experiments](https://towardsdatascience.com/python-code-from-hypothesis-test-to-online-experiments-with-buiness-cases-e0597c6d1ec)
+- [Implementing A/B Tests in Python](https://medium.com/@robbiegeoghegan/implementing-a-b-tests-in-python-514e9eb5b3a1)
+- [Chi-Squared A/B Test Calculator](https://www.evanmiller.org/ab-testing/chi-squared.html)
+- [Udacity A/B Testing Course Notes](https://github.com/baumanab/udacity_ABTesting#summary)
