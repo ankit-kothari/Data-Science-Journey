@@ -108,53 +108,115 @@ Should **not** change between groups. If they do, randomization is broken.
 
 ### Evaluation metrics
 
-| Type | Rec-sys examples | Note |
-| --- | --- | --- |
-| **Binary** | Click-through (click/no-click), add-to-cart, purchase conversion | Needs more samples |
-| **Continuous** | Revenue per session, watch time, session duration, items browsed | Needs fewer samples |
+| Type | Rec-sys examples | Typical effect size | Sample implication |
+| --- | --- | --- | --- |
+| **Binary** | Purchase conversion, add-to-cart, click-through | 0.1–0.5 pp absolute | Needs 10–50K users/group |
+| **Continuous** | Revenue/session, units/order, watch time, session duration | d = 0.05–0.15 | Needs 1–5K users/group |
 
-A good experiment tracks **one primary metric** (e.g., CTR) plus **guardrail metrics** (e.g., revenue, diversity of recs, coverage) to ensure the new model doesn't win on clicks while degrading something else.
+A good experiment tracks **one primary metric** plus **guardrail metrics** to catch tradeoffs:
+
+| Primary metric | Guardrail metrics | Why |
+| --- | --- | --- |
+| Purchase conversion | Revenue/session, return rate, category diversity | New ranker might boost cheap impulse buys but hurt AOV |
+| Units per order | Revenue/order, cart abandonment rate | Cross-sell might add low-margin items or overwhelm users |
+| CTR on carousel | Conversion, session depth, rec diversity | High CTR from clickbait titles hurts downstream metrics |
+| Revenue per session | Conversion rate, items viewed, latency p99 | Revenue can rise from fewer high-ticket sales while conversion drops |
 
 ---
 
 ## 5. Effect Size
 
-The **standardized magnitude of difference** between groups. Measures *how big* the effect is, not just whether it exists. Units: standard deviations.
+Effect size = **how many standard deviations** the treatment mean (or proportion) is from control. A test can be *statistically significant* with a tiny, useless effect — effect size tells you whether the lift is *worth shipping*.
 
-### Baseline metric
+### Why effect size drives experiment planning
 
-Establish the current value before running the test.
+Three numbers you must know before running any experiment: **baseline value**, **minimum detectable effect (MDE)**, and **standard deviation**. These determine whether you can even *detect* the lift you care about given your traffic — and whether the lift is worth pursuing. Reasoning about practical significance, not just p-values, is what separates good experiment design from naive hypothesis testing.
 
-> **Example:** Your homepage "Recommended for You" carousel has a 12% CTR (baseline = 0.12). There's 88% room for improvement — worth testing a new ranking model. If the baseline were 95%, the max possible lift is 5 pp, which may not justify the engineering cost of a new model.
+### Baseline metric — anchor every experiment
 
-### Effect size for means (Cohen's d)
+Establish the current value *and its variance* before running the test.
+
+> **Scenario — conversion rate:** Your e-commerce "Recommended for You" carousel has a **3.2% purchase conversion rate** (baseline = 0.032, σ ≈ 0.176). A new two-tower retrieval model should increase this. With a 3.2% baseline, even a 0.3 pp absolute lift (3.2% → 3.5%) is a **+9.4% relative lift** — meaningful for revenue. But if your baseline were 40%, a 0.3 pp lift is noise.
+>
+> **Scenario — units per order:** Your "Complete the Look" cross-sell widget shows avg 2.3 units per order (σ = 1.8). A personalized version targets 2.5 units. The absolute lift is 0.2 units, but you need to know σ to judge whether that's detectable.
+
+**Rule of thumb:** low-baseline metrics (conversion, add-to-cart) need large *relative* lifts to be detectable. High-baseline metrics (CTR on a carousel) can detect smaller relative changes.
+
+### Effect size for means — Cohen's d
+
+`d = (μ_treatment − μ_control) / σ_pooled`
+
+| d | Interpretation | Rec-sys example |
+| --- | --- | --- |
+| 0.02–0.05 | Very small | Units per order: 2.3 → 2.4 (σ = 1.8) → d = 0.056 |
+| 0.10–0.20 | Small | Revenue/session: $8.50 → $9.20 (σ = $6.00) → d = 0.117 |
+| 0.50 | Medium | Watch time: 25 min → 32 min (σ = 14 min) → d = 0.50 |
+| 0.80+ | Large | Rare in production rec-sys experiments |
 
 ```python
-# Scenario: testing whether a new ranker increases avg revenue per session
-# Baseline: mean = $4.20, std = $3.50, target = $4.40
-effect_size = (4.40 - 4.20) / 3.50  # ≈ 0.057
+# Scenario 1: personalized cross-sell widget — does it increase units per order?
+# Baseline: mean = 2.3 units, std = 1.8, target = 2.5
+d = (2.5 - 2.3) / 1.8  # d ≈ 0.11 — small effect, needs ~1,300 users/group
+
+# Scenario 2: new ranking model — does it increase revenue per session?
+# Baseline: mean = $8.50, std = $6.00, target = $9.20
+d = (9.20 - 8.50) / 6.00  # d ≈ 0.117 — similar magnitude
+
+# Scenario 3: homepage feed rerank — does it increase session duration?
+# Baseline: mean = 12.4 min, std = 8.1 min, target = 13.0 min
+d = (13.0 - 12.4) / 8.1  # d ≈ 0.074 — very small, needs ~2,900 users/group
 ```
 
-### Effect size for proportions (Cohen's h)
+**In practice:** most production rec-sys experiments have d between 0.02 and 0.15. This is why you need thousands of users — the effects are real but small relative to user-level variance.
+
+### Effect size for proportions — Cohen's h
+
+`h = 2 × (arcsin(√p₂) − arcsin(√p₁))`
+
+The arcsin transform stabilizes variance across different baseline rates — a 1 pp lift from 3% → 4% is a bigger *relative* signal than 50% → 51%.
 
 ```python
 import statsmodels.stats.api as sms
 
-# Scenario: homepage carousel CTR — want to detect a 10% relative lift
-baseline_ctr = 0.12
-min_detectable_diff = 0.10 * baseline_ctr  # 1.2 pp absolute lift
+# Scenario 1: purchase conversion — new retrieval model
+# Baseline: 3.2% conversion, want to detect a +10% relative lift (3.2% → 3.52%)
+baseline = 0.032
+target = 0.032 * 1.10  # = 0.0352
+h = sms.proportion_effectsize(baseline, target)
+# h ≈ 0.019 — very small; needs ~43,000 users/group at 80% power
 
-effect_size = sms.proportion_effectsize(baseline_ctr, baseline_ctr + min_detectable_diff)
-# effect_size ≈ -0.037
+# Scenario 2: add-to-cart rate — personalized "You might also like"
+# Baseline: 8.5% add-to-cart, want to detect +2 pp absolute lift (8.5% → 10.5%)
+baseline = 0.085
+target = 0.105
+h = sms.proportion_effectsize(baseline, target)
+# h ≈ 0.068 — still small; needs ~3,400 users/group
+
+# Scenario 3: carousel CTR — reranking by user affinity
+# Baseline: 15% CTR, want to detect +3 pp absolute lift (15% → 18%)
+baseline = 0.15
+target = 0.18
+h = sms.proportion_effectsize(baseline, target)
+# h ≈ 0.082 — moderate; needs ~2,300 users/group
 ```
 
-Formula: `h = 2 * (arcsin(sqrt(p1)) - arcsin(sqrt(p2)))`
+**In practice:** conversion rates have small absolute values (3–8%), so even meaningful business lifts produce tiny effect sizes. This is why conversion experiments run longer than engagement experiments — and why many teams use **revenue per user** (continuous, higher variance but also higher signal) as the primary metric instead.
+
+### Choosing the MDE — the business question behind the math
+
+| Metric | Typical baseline | Realistic MDE | Why |
+| --- | --- | --- | --- |
+| Purchase conversion | 2–5% | 5–15% relative | Below 5% relative lift, revenue gain doesn't justify eng cost |
+| Units per order | 2.0–3.5 | 0.1–0.3 units | Each +0.1 unit ≈ +$3–5 AOV at scale |
+| Revenue per session | $5–15 | 3–8% relative | Directly tied to topline; small % = large $ at volume |
+| CTR (carousel/feed) | 10–20% | 1–3 pp absolute | CTR is a proxy — only matters if downstream conversion follows |
+| Session duration | 8–20 min | 5–10% relative | Engagement proxy; diminishing returns past some threshold |
 
 ---
 
 ## 6. Sample Size Calculation
 
-### For proportions (binary: clicked / didn't click)
+### For proportions (binary: converted / didn't convert)
 
 <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-16_at_12.20.38_PM.png" width="40%">
 
@@ -163,42 +225,64 @@ Where **ω** = minimum detectable change.
 ```python
 import statsmodels.stats.api as sms
 
-# How many users to detect a 10% relative lift in carousel CTR?
-baseline_ctr = 0.12
+# Scenario: new two-tower retrieval model — does it lift purchase conversion?
+# Baseline conversion = 3.2%, want to detect +10% relative lift (→ 3.52%)
+baseline = 0.032
+target = 0.032 * 1.10  # 3.52% — a 0.32 pp absolute lift
 alpha = 0.05
 power = 0.80
-min_diff = 0.10 * baseline_ctr  # 1.2 pp
 
-effect_size = sms.proportion_effectsize(baseline_ctr, baseline_ctr + min_diff)
-sample_size = sms.NormalIndPower().solve_power(
+effect_size = sms.proportion_effectsize(baseline, target)
+n = sms.NormalIndPower().solve_power(
     effect_size=effect_size, power=power, alpha=alpha, ratio=1
 )
-print(f"Required: {sample_size:.0f} users per group")
-# Output: ~8,600 users per group
+print(f"Required: {n:.0f} users per group")
+# Output: ~43,000 users per group
+# At 100K daily visitors (50/50 split): ~17 days to reach sample size
+
+# Scenario 2: add-to-cart rate for personalized cross-sell
+# Baseline = 8.5%, want to detect +2 pp absolute lift (→ 10.5%)
+effect_size_2 = sms.proportion_effectsize(0.085, 0.105)
+n2 = sms.NormalIndPower().solve_power(
+    effect_size=effect_size_2, power=0.80, alpha=0.05, ratio=1
+)
+print(f"Required: {n2:.0f} users per group")
+# Output: ~3,400 users per group — much faster because the absolute lift is larger
 ```
 
-### For means (continuous: revenue, session time)
+### For means (continuous: revenue per session, units per order)
 
 <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/Screen_Shot_2020-08-16_at_12.25.59_PM.png" width="40%">
 
 ```python
 import statsmodels.stats.api as sms
 
-# How many users to detect a shift in avg revenue per session?
-effect_size = 0.1  # small effect (Cohen's d)
-alpha = 0.05
-power = 0.80
+# Scenario: personalized cross-sell — does it increase units per order?
+# Baseline: mean = 2.3 units, std = 1.8, target = 2.5 → d = 0.11
+d = (2.5 - 2.3) / 1.8
+n = sms.TTestIndPower().solve_power(effect_size=d, power=0.80, alpha=0.05)
+print(f"Units per order: {n:.0f} users per group")
+# Output: ~1,300 users per group
 
-sample_size = sms.TTestIndPower().solve_power(
-    effect_size=effect_size, power=power, alpha=alpha
-)
-print(f"Required: {sample_size:.0f} users per group")
-# Output: ~1,571 users per group
+# Scenario 2: new ranking model — revenue per session
+# Baseline: mean = $8.50, std = $6.00, target = $9.20 → d = 0.117
+d2 = (9.20 - 8.50) / 6.00
+n2 = sms.TTestIndPower().solve_power(effect_size=d2, power=0.80, alpha=0.05)
+print(f"Revenue/session: {n2:.0f} users per group")
+# Output: ~1,150 users per group — continuous metrics need fewer users than proportions
 ```
 
 ### Trade-off: sample size vs detectable effect
 
-Smaller effects need exponentially more users. This plot helps decide: is detecting a 0.5 pp CTR lift worth running the test for 4 weeks instead of 1?
+Smaller effects need exponentially more users. This is the core planning decision: is detecting a 0.3 pp conversion lift worth running the test for 3 weeks instead of 1?
+
+| Metric | MDE | Users/group | Days at 50K/day (50/50) |
+| --- | --- | --- | --- |
+| Conversion (3.2%) | +1.0 pp | ~4,200 | < 1 day |
+| Conversion (3.2%) | +0.3 pp | ~43,000 | ~2 days |
+| Conversion (3.2%) | +0.1 pp | ~390,000 | ~16 days |
+| Units/order (2.3, σ=1.8) | +0.2 units | ~1,300 | < 1 day |
+| Units/order (2.3, σ=1.8) | +0.05 units | ~20,500 | < 1 day |
 
 <img src="https://github.com/ankit-kothari/data_science_journey/blob/master/github_images/effect.png" width="40%">
 
@@ -207,8 +291,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import statsmodels.stats.api as sms
 
-baseline = 0.12
-deltas = np.arange(0.005, 0.03, 0.001)
+# How sample size explodes as you try to detect smaller conversion lifts
+baseline = 0.032  # 3.2% purchase conversion
+deltas = np.arange(0.001, 0.015, 0.0005)  # 0.1 pp to 1.5 pp absolute lifts
 sizes = []
 
 for delta in deltas:
@@ -217,9 +302,11 @@ for delta in deltas:
     sizes.append(n)
 
 plt.plot(deltas * 100, sizes)
-plt.title("Sample Size vs Minimum Detectable CTR Lift")
+plt.axhline(y=50_000, color="r", linestyle="--", label="50K users (typical 2-day budget)")
+plt.title("Sample Size vs Minimum Detectable Conversion Lift (baseline=3.2%)")
 plt.ylabel("Users per Group")
 plt.xlabel("Minimum Detectable Lift (percentage points)")
+plt.legend()
 plt.tight_layout()
 plt.show()
 ```
@@ -428,19 +515,21 @@ def ztest_two_proportions(X1: int, X2: int, n1: int, n2: int):
 
 | Variant | Rec-sys use case |
 | --- | --- |
-| **Independent samples** | Compare avg revenue per session: control vs treatment |
+| **Independent samples** | Units per order: personalized cross-sell vs rule-based |
 | **Paired samples** | Same users, before/after a ranking model change |
-| **One-sample** | Is avg watch time in treatment > 30 min target? |
+| **One-sample** | Is avg revenue/session in treatment > $8.50 baseline? |
 
 ```python
 from scipy.stats import ttest_ind
 import numpy as np
 
-# Comparing avg revenue per session between ranker variants
-revenue_control = np.random.normal(4.20, 3.50, 5000)
-revenue_treatment = np.random.normal(4.40, 3.80, 5000)
+# Scenario: personalized cross-sell widget — does it increase units per order?
+# Control: rule-based "Customers also bought" (mean=2.3, std=1.8)
+# Treatment: personalized widget using purchase history (mean=2.5, std=1.9)
+units_control = np.random.normal(2.3, 1.8, 5000)
+units_treatment = np.random.normal(2.5, 1.9, 5000)
 
-t_score, p_value = ttest_ind(revenue_control, revenue_treatment, equal_var=True)
+t_score, p_value = ttest_ind(units_control, units_treatment, equal_var=True)
 print(f"t = {t_score:.2f}, p = {p_value:.4f} (two-tailed)")
 ```
 
@@ -452,9 +541,10 @@ print(f"t = {t_score:.2f}, p = {p_value:.4f} (two-tailed)")
 from scipy.stats import ttest_ind
 import numpy as np
 
-# Unequal groups: 70/30 traffic split to reduce risk of new model
-revenue_control = np.random.normal(4.20, 3.50, 7000)
-revenue_treatment = np.random.normal(4.40, 3.80, 3000)
+# Unequal groups: 70/30 traffic split to reduce risk of new ranker
+# Revenue per session — higher variance metric, unequal group sizes
+revenue_control = np.random.normal(8.50, 6.00, 7000)
+revenue_treatment = np.random.normal(9.20, 6.50, 3000)
 
 t_score, p_value = ttest_ind(revenue_control, revenue_treatment, equal_var=False)
 print(f"t = {t_score:.2f}, p = {p_value:.4f} (two-tailed, Welch)")
@@ -603,11 +693,13 @@ p-value < α → the observed difference is unlikely under H₀.
 
 ### Bar 2: Practically significant
 
-The confidence interval lower bound exceeds the **minimum detectable effect** you defined upfront.
+The confidence interval lower bound exceeds the **minimum detectable effect** you defined upfront. A result can be statistically significant but too small to justify the cost of shipping (model training infra, latency overhead, eng maintenance).
 
-> **Example:** You tested a new ranking model for homepage recommendations. The 95% CI for the CTR difference is [−0.39%, +0.08%]. Your minimum detectable effect was 1%. Since the lower bound is well below 1%, you **cannot reject H₀** — the new ranker doesn't demonstrate a meaningful improvement. Keep the existing model.
-
-Even a statistically significant result can be too small to justify the cost — model training infrastructure, latency overhead, engineering maintenance. If shipping the new ranker costs 2 engineer-months and the lift is 0.1 pp CTR, it may not be worth it.
+> **Scenario — ship:** You tested a personalized cross-sell widget against a rule-based "Customers also bought" widget. MDE was +0.15 units per order. Result: mean lift = +0.24 units, 95% CI = [+0.17, +0.31]. The CI lower bound (0.17) exceeds the MDE (0.15) → **ship it**. At 500K orders/month, +0.24 units ≈ +120K incremental items/month.
+>
+> **Scenario — don't ship:** You tested a new two-tower ranker for homepage recs. MDE was +0.3 pp conversion. Result: mean lift = +0.12 pp, 95% CI = [−0.05 pp, +0.29 pp]. The CI includes zero *and* the upper bound doesn't reach 0.3 pp → **keep the existing model**. The new ranker adds 40ms latency and 2 eng-months of maintenance — not worth a lift you can't even confirm exists.
+>
+> **Scenario — significant but not practical:** The same ranker test with 10× more traffic shows lift = +0.08 pp, 95% CI = [+0.02 pp, +0.14 pp]. Now p < 0.05 (CI excludes zero), but the upper bound (0.14 pp) is still below your 0.3 pp MDE. **Statistically significant, practically useless** — this is the most common mistake in experiment readouts.
 
 ### Computing the confidence interval
 
@@ -615,27 +707,38 @@ Even a statistically significant result can be too small to justify the cost —
 import math
 import scipy.stats as st
 
-# Example: comparing conversion rates between ranking model variants
-prob_pooled = (conversions_control + conversions_treatment) / (n_control + n_treatment)
+# Worked example: new two-tower ranker for purchase conversion
+# Control: 1,600 conversions out of 50,000 users (3.20%)
+# Treatment: 1,660 conversions out of 50,000 users (3.32%)
+n_ctrl, n_treat = 50_000, 50_000
+conv_ctrl, conv_treat = 1_600, 1_660
+alpha = 0.05
+mde = 0.003  # 0.3 pp — our minimum detectable effect
 
-se_pooled = math.sqrt(
-    prob_pooled * (1 - prob_pooled) * (1/n_control + 1/n_treatment)
-)
-z = st.norm.ppf(1 - alpha / 2)
-margin = se_pooled * z
+p_ctrl = conv_ctrl / n_ctrl        # 0.0320
+p_treat = conv_treat / n_treat      # 0.0332
+p_pooled = (conv_ctrl + conv_treat) / (n_ctrl + n_treat)  # 0.0326
 
-d_hat = (conversions_treatment / n_treatment) - (conversions_control / n_control)
+se = math.sqrt(p_pooled * (1 - p_pooled) * (1/n_ctrl + 1/n_treat))
+z = st.norm.ppf(1 - alpha / 2)     # 1.96
+margin = se * z
 
+d_hat = p_treat - p_ctrl            # +0.0012 (0.12 pp)
 lower = d_hat - margin
 upper = d_hat + margin
 
-print(f"CTR lift: {d_hat*100:.2f}%")
-print(f"95% CI: [{lower*100:.2f}%, {upper*100:.2f}%]")
+print(f"Conversion lift: {d_hat*100:.2f} pp")
+print(f"95% CI: [{lower*100:.2f} pp, {upper*100:.2f} pp]")
+# Output: lift = 0.12 pp, CI = [-0.05 pp, +0.29 pp]
 
-if min_detectable_effect < lower:
-    print("Ship it — statistically and practically significant")
+# Decision logic
+if lower > 0 and lower > mde:
+    print("Ship — statistically AND practically significant")
+elif lower > 0:
+    print("Significant but below MDE — probably not worth the eng cost")
 else:
-    print("Keep current model")
+    print("CI includes zero — cannot reject H₀, keep current model")
+# Output: CI includes zero — keep current model
 ```
 
 ---
